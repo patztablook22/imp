@@ -1,6 +1,8 @@
 module Console
 
-  include Colors
+  COLOR_DEFAULT    = "\e[39m"
+  COLOR_RED        = "\e[31m"
+  COLOR_GREEN      = "\e[32m"
 
   @@heap = []
   @@size = 0

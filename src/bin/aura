@@ -1,35 +1,23 @@
 #! /usr/bin/env ruby
 
-$base = __dir__ + "/../.."
-$env
 
-# require the bare minimum to process options
-require_relative '../lib/lite'
+$git = __dir__ + "/../.."
+$lib = "#$git/src/lib"
 
-# load some other common libraries
-require_relative '../lib/aura'
+# require external libs
+require 'optparse'
+require 'fileutils'
+require 'open3'
+require 'net/http'
+require 'open-uri'
+
+# require internal libs
+Dir["#$lib/base/*"].each do |file|
+  require_relative file
+end
 
 Signal.trap('INT') { puts; exit 1 }
-
-$env.conf   = "#$base/config.txt"
-$env.conf!  rescue Console.err("unparseable config file")
-
-$env.errs   = "#$base/errors.txt"
-$env.aurs   = "#$base/auras/aurs"
-$env.pkgs   = "#$base/auras/pkgs"
-$env.root   = "#$base/auras/root"
-$env.todo   = nil
-$env.redo   = false
-$env.keep   = false
-$env.dump   = false
-$env.toor   = false
-$env.verb   = false
-$env.init!
-
-Console.err("aura tree invalid") unless $env.tree?
-
-$env.dump! if $env.dump?
-$env.toor! if $env.toor?
+Cycle.go! "env"
 
 unless $env.todo
 
@@ -40,9 +28,11 @@ unless $env.todo
 
 end
 
+Cycle.go! "install"
+exit
 # load the lifecycle
 if $env.find?
-  require_relative '../lib/browse'
+  require_relative "#$lib/cycle/browse"
 else
-  require_relative '../lib/install'
+  require_relative "#$lib/cycle/install"
 end
