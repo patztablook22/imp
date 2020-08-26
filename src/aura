@@ -1,8 +1,9 @@
 #! /usr/bin/env ruby
 
-
-$git = __dir__ + "/../.."
-$lib = "#$git/src/lib"
+# AURA git root etc.
+$git = __dir__ + "/../"
+$src = __dir__
+$lib = "#$src/lib"
 
 # require external libs
 require 'optparse'
@@ -12,11 +13,14 @@ require 'net/http'
 require 'open-uri'
 
 # require internal libs
-Dir["#$lib/base/*"].each do |file|
+Dir["#$lib/*"].each do |file|
   require_relative file
 end
 
+# CTRL+C interrupt
 Signal.trap('INT') { puts; exit 1 }
+
+# initialize environment
 Cycle.go! "env"
 
 unless $env.todo
@@ -32,7 +36,7 @@ Cycle.go! "install"
 exit
 # load the lifecycle
 if $env.find?
-  require_relative "#$lib/cycle/browse"
+  require_relative "#$src/cycle/browse"
 else
-  require_relative "#$lib/cycle/install"
+  require_relative "#$src/cycle/install"
 end

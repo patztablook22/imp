@@ -5,7 +5,7 @@ module Cycle
   # run a cycle
   # called from without
   def self.go! name
-    @@path = "#$lib/cycle/#{name}" 
+    @@path = "#$src/cycle/#{name}" 
     require_relative "#@@path/run"
   end
 
@@ -17,7 +17,5 @@ module Cycle
       require_relative path
     end
   end
-
-  private
 
 end
