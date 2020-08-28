@@ -32,11 +32,8 @@ class Task
   # Task> file_updated
   #
   def self.> msg
-    if $debug
-      plot msg
-    else
-      Msg[1] = msg
-    end
+    msg = "> #{msg}"
+    Msg[1] = msg unless Debug.hook plot(msg)
   end
 
   # progress msg
@@ -44,9 +41,7 @@ class Task
   # Task < percent
   #
   def self.< tmp
-    unless $debug
-      Msg[2] = tmp if msg?
-    end
+    Msg[2] = tmp unless Debug.hook plot(msg)
   end
 
   # runs given task
@@ -94,21 +89,13 @@ class Task
 
     @field["args"] = args
 
-    if $debug
-
-      if @caller.nil?
-        buf = "IMP"
-      else
-        buf = @caller
-      end
-
-      plot "#{self} ~ #{buf}"
-
+    if @caller.nil?
+      buf = "IMP"
     else
-
-      Msg[0] = to_s
-
+      buf = @caller
     end
+
+    Msg[0] = to_s unless Debug.hook plot("#{self} ~ #{buf}")
 
     begin
       @@active = self
@@ -127,11 +114,11 @@ class Task
   def quit status
 
     @status  = status
-    plot "=> #{status}" if $debug
 
     case @status
     when 0
     when 1
+      Debug.hook plot(@status)
       exit 1
     end
 
@@ -154,7 +141,7 @@ class Task
   end
 
   def plot str
-    STDERR.puts "  " * @@level + str.to_s
+    "    " * @@level + str.to_s
   end
 
   def self.plot str

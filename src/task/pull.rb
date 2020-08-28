@@ -13,4 +13,5 @@ Task["pkgdir" ] = Env["pkgdir"] + "/" + todo
 Task* "request"
 Task* "depends"
 Task* "sources"
-Task* "install"
+Task* "makepkg"
+Task* "export"
