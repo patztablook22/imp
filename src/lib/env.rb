@@ -13,7 +13,7 @@ module Env
     "redo"         =>    Boolean.new,
     "dump"         =>    Boolean.new,
     "clean"        =>    Boolean.new,
-    "aupgrade"     =>    Boolean.new,
+    "imp-upgrade"  =>    Boolean.new,
     "printenv"     =>    Boolean.new,
     "aurdir"       =>       Text.new,
     "srcdir"       =>       Text.new,
@@ -131,7 +131,7 @@ module Env
       buf << "  -#{var.opt},"
     end
 
-    buf << " --" << Msg.tab(token, 10)
+    buf << " --" << Msg.tab(token, 13)
     buf << " " << var.man
     buf << "\n"
 
@@ -143,7 +143,7 @@ module Env
   def self.help
 
     buf = String.new
-    buf << "aura [options] todo\n"
+    buf << "imp [options] todo\n"
 
     @@data.each do |key, var|
       next if var.opt.nil?

@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-# where to put the aura directory
+# where to install itself"
 BASEDIR="$HOME/.config"
 
 # number of dependencies
@@ -46,7 +46,7 @@ if [ "$todo" = "" ]; then
   echo "Unfortunately this installer doesn't support your distribution"
   echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
   echo "Don't panic though! Just follow the instructions at:"
-  echo "https://github.com/patztablook22/aura#manual-installation"
+  echo "https://github.com/patztablook22/imp#manual-installation"
   echo
   exit 1
 fi
@@ -68,40 +68,40 @@ for (( i = 1; i < $DEPENDS; i++ )); do
 done
 buf=$(echo $todo | awk "{print $buf}")
 
-log DEPS "$buf"
+log DEP "$buf"
 
 # install dependencies
 sudo $todo > /dev/null 2>&1
 
-# clone aura into $BASEDIR/aura
+# clone imp into $BASEDIR/imp
 mkdir -p $BASEDIR  > /dev/null 2>&1
 cd $BASEDIR
 
 backup=0
 
-if [ -e aura ]; then
+if [ -e imp ]; then
 
-  if [ -e aura/config.txt ]; then
-    log SAVE config.txt
+  if [ -e imp/config.txt ]; then
+    log OLD config.txt
     backup=1
-    config=$(cat aura/config.txt)
+    config=$(cat imp/config.txt)
   fi
 
-  log AURA reinstalling
-  rm -rf aura
+  log IMP reinstalling
+  rm -rf imp
 
 else
-  log AURA installing
+  log IMP installing
 fi
 
-git clone -q https://github.com/patztablook22/aura/
+git clone -q https://github.com/patztablook22/imp
 
 if [ $backup = 1 ]; then
-  printf "${config}\n" > aura/config.txt
+  printf "${config}\n" > imp/config.txt
 fi
 
-# /usr/bin/aura executable
-sudo install aura/aura /usr/bin/
+# /usr/bin/imp executable
+sudo install imp/imp /usr/bin/
 
 # done
 log DONE successful

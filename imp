@@ -1,21 +1,21 @@
 #! /usr/bin/env ruby
 
-# This script runs appropriate AURA instance
+# This script runs appropriate imp instance
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # 
-# maybe it's inside its own AURA directory
-# >>> user@linux ~/test/aura $ ./aura
+# maybe it's inside its own imp directory
+# >>> user@linux ~/test/imp $ ./imp
 #
 # also might be called from inside another
-# >>> user@linux ~/test/aura/src $ aura
+# >>> user@linux ~/test/imp/src/coding $ imp
 #
-# otherwise try ~/.config/aura
-# >>> user@linux ~ $ aura
+# otherwise try ~/.config/imp
+# >>> user@linux ~ $ imp
 # 
 # else error
 
 
-main = "/src/aura"
+main = "/src/imp"
 path = Array.new
 
 # inside it's own
@@ -28,8 +28,8 @@ begin
   tmp = File.dirname tmp
 end until tmp == "/"
 
-# default AURA
-path << ENV["HOME"] + "/.config/aura" + main
+# default imp
+path << ENV["HOME"] + "/.config/imp" + main
 
 # get first valid path
 bin = path.find do |i|
@@ -38,7 +38,7 @@ end
 
 # none valid
 if bin.nil?
-  $stderr.puts "can't find appropriate AURA"
+  $stderr.puts "can't find appropriate imp"
   exit 1
 end
 
@@ -48,5 +48,5 @@ ARGV.each do |arg|
   args << " " << arg
 end
 
-# execute appropriate AURA
+# execute appropriate imp
 exec(bin + args)

@@ -24,16 +24,16 @@ Env["...dump pkgdir fakeroot", "d"]
 Env["clean", false]
 Env["...clean pkgdir fakeroot", "c"]
 
-Env["aupgrade", false]
-Env["...aura upgrade", "a"]
+Env["imp-upgrade", false]
+Env["...upgrade itself", "i"]
 
-Env["aurdir", "#$git/auras/aurdir", :same]
+Env["aurdir", "#$git/local/aurdir", :same]
 Env["...local aur repo"]
 
-Env["srcdir", "#$git/auras/srcdir", :same]
+Env["srcdir", "#$git/local/srcdir", :same]
 Env["...temp dir for sources"]
 
-Env["pkgdir", "#$git/auras/pkgdir", :same]
+Env["pkgdir", "#$git/local/pkgdir", :same]
 Env["...temp fakeroot for packages"]
 
 Env["printenv", false]
@@ -42,8 +42,7 @@ Env["...print environment"]
 Env["todo", "", ""]
 Env["...todo, but option format"]
 
-err if Err.ed?
-
+Task^1 if Err.ed?
 Task> "config.txt"
 
 Env << Config

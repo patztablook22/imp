@@ -1,8 +1,8 @@
 #! /usr/bin/env ruby
 
-# main AURA script
+# imp main script
 
-# AURA git root etc.
+# imp git root etc.
 $git = File.expand_path __dir__ + "/../"
 $src = __dir__
 $lib = "#$src/lib"
