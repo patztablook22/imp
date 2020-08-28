@@ -24,11 +24,6 @@ class Pipe
 
   def go!
 
-    ### old solution
-    #
-    # @stdout, @stderr, @return = Open3.capture3 @command
-    # @return = @return.exitstatus
-
     stdin, stdout, stderr, thread = Open3.popen3 @command
 
     @stdout = stdout.read

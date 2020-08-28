@@ -117,7 +117,7 @@ class Task
     case @status
     when 0
     when 1
-      Debug.hook plot(@status)
+      Msg.err unless Debug.hook plot(@status)
       exit 1
     end
 

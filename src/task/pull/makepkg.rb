@@ -1,3 +1,4 @@
+Dir.chdir  Task["srcdir"]
 pkgbuild = Task["pkgbuild"]
 function = ["prepare", "build", "package"]
 
@@ -17,18 +18,46 @@ function.each do |func|
     }
 
     #{func}() {
-      :
       #{body}
     }
 
-    #{func}
 
   "
 
-  pipe = Pipe.go! body
+  pipe = Pipe.go! "bash -c '#{script}'"
   unless pipe.ok?
+
+    err = pipe.err
+
+    # if shell syntax error
+    if err =~ /\Ash: \d+: /
+
+      errline = err.split(": ")[1].to_i
+      script.split("\n").each_with_index do |line, number|
+
+        next if number < 5
+
+        if number == errline
+          buf = ">>> "
+        else
+          buf = "    "
+        end
+
+        buf << errline.to_i
+        buf << Msg.tab(number, 3, true)
+        buf << "    " + line
+
+        Err << buf
+
+      end
+
+    end
+
+    Err << err
+
     Task* "cleanup"
     Task^1
+
   end
 
 end
