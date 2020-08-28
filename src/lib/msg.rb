@@ -1,8 +1,9 @@
+require_relative "term"
+
 module Msg
 
-  COL_DEFAULT = "\e[39m"
-  COL_RED     = "\e[31m"
-  COL_GREEN   = "\e[32m"
+  extend  Term
+  include Term
 
   ##
   @@data = [
@@ -111,11 +112,6 @@ module Msg
 
     # sleep 0.2 if !flag
 
-  end
-
-  def self.width
-    pipe = Pipe.go! "tput cols"
-    pipe.out.to_i
   end
 
   def self.back num

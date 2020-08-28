@@ -18,7 +18,7 @@ module Debug
       STDERR.puts
       STDERR.puts
       STDERR.puts "IMP DEBUG"
-      hr
+      Term.hr
       STDERR.puts
     end
 
@@ -29,7 +29,7 @@ module Debug
   # set debug mode
   def self.on!
     @@active = true
-    hr
+    Term.hr
   end
 
   # set debug hook
@@ -41,10 +41,6 @@ module Debug
     end
     STDERR.puts str
     true
-  end
-
-  def self.hr
-    STDERR.puts "─" * Msg.width
   end
 
 end

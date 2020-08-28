@@ -28,6 +28,7 @@ class Parser
 
     case ch
     when "#"
+      return "#" if @type == :function
       @comment = true
       return
     when "\n"
