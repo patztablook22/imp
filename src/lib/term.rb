@@ -22,4 +22,13 @@ module Term
     STDERR.puts pipe.out
   end
 
+  def tab str, num, right = false
+    return str if str.nil? or str.length >= num
+    buf  = String.new
+    buf << str  if !right
+    buf << " " * (num - str.length)
+    buf << str  if  right
+    buf
+  end
+
 end

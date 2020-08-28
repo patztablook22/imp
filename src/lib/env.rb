@@ -10,12 +10,12 @@ module Env
     "imp-upgrade"  =>    Boolean.new,
     "depend"       =>       List.new,
     "verbose"      =>     Abacus.new,
-    "printenv"     =>    Boolean.new,
     "local"        =>       Text.new,
     "temp"         =>       Text.new,
     "keep"         =>    Boolean.new,
     "clean"        =>    Boolean.new,
     "todo"         =>       Text.new,
+    "env"          =>       Text.new,
     "debug"        =>    Boolean.new,
 
   }
@@ -96,14 +96,6 @@ module Env
       @@data[token].get
     else
       @@last = token
-      if false
-        puts
-        puts "AAAAAAAAAAAAAAAAAAAAAAAAA"
-        pp token
-        pp value
-        pp empty
-        pp args
-      end
       @@data[token].value value
       @@data[token].empty empty
     end
@@ -129,8 +121,8 @@ module Env
       buf << "  -#{var.opt},"
     end
 
-    buf << " --" << Msg.tab(token, 13)
-    buf << " " << var.man
+    buf << " --" << Msg.tab(token, longest + 4)
+    buf << var.man
     buf << "\n"
 
     buf
@@ -161,17 +153,21 @@ module Env
     buf
   end
 
-  # dump env pairs
+  # export env
   def self.to_s
+
+    unlisted = [ "env", "todo" ]
+
     buf = String.new
     @@data.each do |key, var|
 
-      buf << key << " = "
+      val = var.get
 
-      unless var.nil?
-        buf << var.get.to_s
-      end
+      next if unlisted.include? key or val.to_s.empty?
 
+      val  = val.join(" ") if val.class == Array
+      buf << Term.tab(key, longest, true) << " = "
+      buf << val.to_s
       buf << "\n"
 
     end
@@ -180,9 +176,15 @@ module Env
 
   # import environment from parseable object
   # object.parse should return Hash
-  def self.<< object
+  def self.<< import
 
-    data = object.parse
+    return if import.nil?
+
+    if import.class == String
+      return
+    end
+
+    data = import.parse
     return if data.nil?
 
     Var.bump!
@@ -194,6 +196,17 @@ module Env
 
     end
 
+  end
+
+  private
+
+  def self.longest
+    tmp = 0
+    @@data.each_key do |key|
+      len = key.length
+      tmp = len if len > tmp
+    end
+    tmp
   end
 
 end

@@ -1,7 +1,7 @@
 Task* "environment"
 Msg.quiet = false
 
-Task* "upgrade"
+Task* "upgrade" if Env["imp-upgrade"]
 Task* "filesystem"
 
 target = Env["todo"]

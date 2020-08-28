@@ -24,11 +24,11 @@ Env["...dir for temporary files"]
 Env["keep", false]
 Env["...don't export package"]
 
-Env["clean", false]
+Env["clean", "", ""]
 Env["...clean install"]
 
-Env["printenv", false]
-Env["...print environment"]
+Env["env", "", "export"]
+Env["...import / export imp env"]
 
 Env["todo", "", ""]
 Env["...todo, but option format"]
@@ -51,7 +51,7 @@ if Env["help"]
   exit
 end
 
-if Env["printenv"]
+if Env["env"] == "export"
   puts Env
   exit
 end
