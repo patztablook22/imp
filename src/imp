@@ -7,9 +7,6 @@ $git = File.expand_path __dir__ + "/../"
 $src = __dir__
 $lib = "#$src/lib"
 
-# don't do anything accidentally
-exit if ARGV.none?
-
 # require external libs
 require 'fileutils'
 require 'digest'
@@ -25,8 +22,9 @@ end
 # CTRL+C interrupt
 Signal.trap('INT') { puts; exit 1 }
 
-# set debug mode
+# set debug mode / auto-help
 Debug.on! if ARGV.include? "--debug"
+ARGV << "--help" if ARGV.none?
 
 # initialize lifecycle
 Task* "imp"
