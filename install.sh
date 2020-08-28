@@ -104,5 +104,5 @@ fi
 sudo install imp/imp /usr/bin/
 
 # done
-log DONE successful
+log OKI successful
 trap - EXIT
