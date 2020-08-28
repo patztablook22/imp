@@ -82,21 +82,14 @@ class Task
     else
       @field = @@active.field
       @code  = File.dirname(@caller.code) + "/#@caller"
-      @code  = File.dirname(@caller.code) unless File.directory? @code
+      @code  = File.dirname(@caller.code) unless File.file? "#@code/#@name.rb"
       @code += "/#@name.rb"
     end
 
-    @field["args"] = args
-
-    if @caller.nil?
-      buf = "IMP"
-    else
-      buf = @caller
-    end
-
-    Msg[0] = to_s unless Debug.hook plot("#{self} ~ #{buf}")
+    Msg[0] = to_s unless Debug.hook plot(self)
 
     begin
+      @field["args"] = args
       @@active = self
       @@level += 1
       load @code if File.file? @code

@@ -1,6 +1,12 @@
-Dir.chdir  Task["srcdir"]
+srcdir   = Task["srcdir"]
+pkgdir   = Task["pkgdir"]
 pkgbuild = Task["pkgbuild"]
 function = ["prepare", "build", "package"]
+
+Dir.chdir srcdir
+
+FileUtils.rm_rf   pkgdir
+FileUtils.mkdir_p pkgdir
 
 function.each do |func|
 
@@ -11,7 +17,7 @@ function.each do |func|
 
   # colons to make sure the function
   # has at least one command in it
-  script  = "
+  script = "
 
     patch() {
       :
@@ -21,6 +27,7 @@ function.each do |func|
       #{body}
     }
 
+    #{func}
 
   "
 

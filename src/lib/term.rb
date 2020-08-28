@@ -17,4 +17,9 @@ module Term
     STDERR.puts "─" * width
   end
 
+  def clear
+    pipe = Pipe.go! "clear"
+    STDERR.puts pipe.out
+  end
+
 end

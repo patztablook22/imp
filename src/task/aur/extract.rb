@@ -27,6 +27,7 @@ elsif exts.include? "deb"
 end
 
 Task^0 if command.empty?
+Task> File.dirname(file)
 
 pwd = Dir.pwd # save working directory
 Dir.chdir dir # change working directory

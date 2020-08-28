@@ -3,9 +3,7 @@ aurdir  = Task["aurdir" ]
 srcdir  = Task["srcdir" ]
 pkgdir  = Task["pkgdir" ]
 
-if Env["redo"] or !File.directory? aurdir
-
-  FileUtils.rm_rf aurdir
+if !File.directory? aurdir
 
   Task> pkgname
   

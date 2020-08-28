@@ -29,7 +29,7 @@ module Debug
   # set debug mode
   def self.on!
     @@active = true
-    Term.hr
+    Term.clear
   end
 
   # set debug hook

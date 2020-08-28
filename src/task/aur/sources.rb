@@ -2,7 +2,7 @@ pkgbuild = Task["pkgbuild"]
 srcdir   = Task["srcdir"]
 sources  = pkgbuild["source"]
 
-FileUtils.rm_rf   srcdir if Env["redo"]
+FileUtils.rm_rf   srcdir if Env["clean"]
 FileUtils.mkdir_p srcdir
 
 # find hashing algorithm

@@ -3,9 +3,9 @@ depends  = Array.new
 depends += pkgbuild["depends"]
 depends += pkgbuild["makedepends"]
 
-depends.clear if Env["skip"].include? "ALL"
+depends.clear if Env["depend"].include? "ALL"
 depends.select! do |pkg|
-  !Env["skip"].include? pkg
+  !Env["depend"].include? pkg
 end
 Task^0 if depends.none?
 

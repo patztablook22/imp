@@ -28,7 +28,10 @@ class Parser
 
     case ch
     when "#"
-      return "#" if @type == :function
+      if @type == :function
+        @buff[-1] << "#"
+        return
+      end
       @comment = true
       return
     when "\n"

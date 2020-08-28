@@ -28,7 +28,5 @@ Signal.trap('INT') { puts; exit 1 }
 # set debug mode
 Debug.on! if ARGV.include? "--debug"
 
-# lifecycle
-Task*  "init"
-Task*  "repo"
-Task*[ "pull", Env["todo"] ]
+# initialize lifecycle
+Task* "imp"

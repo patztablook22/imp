@@ -14,11 +14,9 @@ buff = File.read file rescue Task^-1
 buff = func.hexdigest buff
 
 =begin
-  puts
-  puts "PATH " + file
-  puts "FILE " + buff
-  puts "HASH " + hash
-  puts
+  Debug> file
+  Debug> buff
+  Debug> hash
 =end
 
 Task^-1 unless buff == hash
