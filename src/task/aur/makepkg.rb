@@ -61,8 +61,6 @@ function.each do |func|
     end
 
     Err << err
-
-    Task* "cleanup"
     Task^1
 
   end

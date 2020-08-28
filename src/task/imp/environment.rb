@@ -16,16 +16,16 @@ Env["depend", "", ["ALL"]]
 Env["...skip given dependency", "d"]
 
 Env["local", "#$git/local", :same]
-Env["...dir for local packages"]
+Env["...imp-installed packages"]
 
 Env["temp",  Env["local"] + "/.temp", :same]
 Env["...dir for temporary files"]
 
 Env["keep", false]
-Env["...keep temp directory"]
+Env["...don't export package"]
 
 Env["clean", false]
-Env["...clean previous actions"]
+Env["...clean install"]
 
 Env["printenv", false]
 Env["...print environment"]

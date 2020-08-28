@@ -3,7 +3,9 @@ aurdir  = Task["aurdir" ]
 srcdir  = Task["srcdir" ]
 pkgdir  = Task["pkgdir" ]
 
-if !File.directory? aurdir
+if !File.directory? aurdir or Env["clean"]
+
+  FileUtils.rm_rf aurdir
 
   Task> pkgname
   

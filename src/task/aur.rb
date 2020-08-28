@@ -12,4 +12,7 @@ Task* "request"
 Task* "depends"
 Task* "sources"
 Task* "makepkg"
-#Task* "export"
+
+Task^0 if Env["keep"]
+Task> pkgname
+Task*["export", Task["pkgdir"]]
