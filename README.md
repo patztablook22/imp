@@ -1,7 +1,23 @@
+# Imp
+Linux **cross-distro** Intelligent Package Manager. \
+Access multiple repositories _(further development needed)_ using simple interface.
+
 ## Automatic installation
 
-```
+```bash
 curl -s https://raw.githubusercontent.com/patztablook22/imp/master/install.sh | bash
+```
+
+## Guide
+```bash
+# print help
+imp --help
+
+# install package
+imp package
+
+# search for package
+imp --find package
 ```
 
 ## Manual installation
