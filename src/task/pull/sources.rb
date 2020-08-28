@@ -41,5 +41,5 @@ end
 
 sources.each do |source|
   Task*[ "checksum", source.take(2) ] != 0 && Task^1
-  Task*[ "extract" , source.take(1) ]
+  Task*[ "extract" , source[0]      ]
 end

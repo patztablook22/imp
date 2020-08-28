@@ -32,8 +32,7 @@ class Task
   # Task> file_updated
   #
   def self.> msg
-    msg = "> #{msg}"
-    Msg[1] = msg unless Debug.hook plot(msg)
+    Msg[1] = msg unless Debug.hook plot("> #{msg}")
   end
 
   # progress msg
@@ -41,7 +40,7 @@ class Task
   # Task < percent
   #
   def self.< tmp
-    Msg[2] = tmp unless Debug.hook plot(msg)
+    Msg[2] = tmp unless Debug.hook plot(">>> #{msg}")
   end
 
   # runs given task
