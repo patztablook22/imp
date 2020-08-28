@@ -66,6 +66,8 @@ module Msg
 
   def self.go! flag = nil
 
+    return if @@quiet
+
     if Env["verbose"] >= 3
       pp @@data
       return

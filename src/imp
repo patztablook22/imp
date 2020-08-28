@@ -25,6 +25,8 @@ end
 # CTRL+C interrupt
 Signal.trap('INT') { puts; exit 1 }
 
+$debug = true if ARGV.include? "--debug"
+
 Task*  "init"
 Task*  "repo"
 Task*[ "pull", Env["todo"] ]

@@ -4,6 +4,7 @@ class Task
 
   @@dir = "#$src/task"  # task root
   @@active = nil        # active Task
+  @@level  = 0          # Task tree level
 
   @name    # name
   @caller  # called by
@@ -31,8 +32,11 @@ class Task
   # Task> file_updated
   #
   def self.> msg
-    puts "│ #{msg}"
-    # Msg[1] = msg
+    if $debug
+      plot msg
+    else
+      Msg[1] = msg
+    end
   end
 
   # progress msg
@@ -40,7 +44,9 @@ class Task
   # Task < percent
   #
   def self.< tmp
-    Msg[2] = tmp
+    unless $debug
+      Msg[2] = tmp if msg?
+    end
   end
 
   # runs given task
@@ -88,33 +94,41 @@ class Task
 
     @field["args"] = args
 
-    if @caller.nil?
-      buf = "IMP"
-    else
-      buf = @caller
-    end
+    if $debug
 
-    puts "#{self} ~ #{buf}"
-    # Msg[0] = to_s
+      if @caller.nil?
+        buf = "IMP"
+      else
+        buf = @caller
+      end
+
+      plot "#{self} ~ #{buf}"
+
+    else
+
+      Msg[0] = to_s
+
+    end
 
     begin
       @@active = self
+      @@level += 1
       load @code if File.file? @code
       @status = 0
     rescue => e
       raise e if @status.nil?
     ensure
       @@active = @caller
+      @@level -= 1
     end
 
   end
 
   def quit status
 
-    @status = status
+    @status  = status
+    plot "=> #{status}" if $debug
 
-    puts "│"
-    puts "@ #@status"
     case @status
     when 0
     when 1
@@ -137,6 +151,14 @@ class Task
   def self.field
     return if @@active.nil?
     @@active.field
+  end
+
+  def plot str
+    STDERR.puts "  " * @@level + str.to_s
+  end
+
+  def self.plot str
+    @@active.plot str
   end
 
 end

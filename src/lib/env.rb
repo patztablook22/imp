@@ -19,6 +19,7 @@ module Env
     "srcdir"       =>       Text.new,
     "pkgdir"       =>       Text.new,
     "todo"         =>       Text.new,
+    "debug"        =>    Boolean.new,
 
   }
 
@@ -185,6 +186,7 @@ module Env
   def self.<< object
 
     data = object.parse
+    return if data.nil?
 
     Var.bump!
 

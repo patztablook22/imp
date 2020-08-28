@@ -42,6 +42,9 @@ Env["...print environment"]
 Env["todo", "", ""]
 Env["...todo, but option format"]
 
+Env["debug", false]
+Env["...debug mode"]
+
 Task^1 if Err.ed?
 Task> "config.txt"
 

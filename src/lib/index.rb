@@ -7,7 +7,7 @@ class Index
     @key = URI.encode_www_form_component(phrase)
     url  = "https://aur.archlinux.org/packages/?O=0&PP=250&K=#@key"
     url += "&&SeB=n"
-    url += "d" if $env.verb?
+    url += "d" if Env["verbose"] > 0
     uri  = URI.parse url
     @doc = uri.open.read
   end
