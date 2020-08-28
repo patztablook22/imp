@@ -21,15 +21,30 @@ class Source
 
   end
 
+  def to_s
+    @source
+  end
+
   def retrieve
  
     File.open(@target, 'w') do |file|
-      case @type
-      when :net;
-        file << retrieveNet
-      when :aur;
-        file << retrieveAur
+
+      begin
+
+        case @type
+        when :net;
+          fileI = retrieveNet
+        when :aur;
+          fileI = retrieveAur
+        end
+
+      rescue
+        Err << "unreadable input file"
       end
+
+    end rescue
+    begin
+      Err << "unreadable output file"
     end
 
   end
@@ -43,7 +58,7 @@ class Source
 
       extension = File.extname(tmp)
       tmp = File.basename(tmp, ".*")
-      
+
       valid = (!extension.empty? and extension =~ /[a-zA-Z]/)
 
       if valid
@@ -81,7 +96,7 @@ class Source
     end
 
     Dir.chdir current
-    
+
   end
 
   private
@@ -92,7 +107,6 @@ class Source
 
     Net::HTTP.start(url.hostname) do |http|
       head = http.request_head(url)
-      Console.log("retrieving", @source, head["content-length"])
     end
 
     uri = URI.parse @source
@@ -101,7 +115,6 @@ class Source
   end
 
   def retrieveAur
-    Console.log("retrieving", @source)
     File.open(@source).read
   end
 

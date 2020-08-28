@@ -15,7 +15,7 @@
 # else error
 
 
-main = "/src/bin/aura"
+main = "/src/aura"
 path = Array.new
 
 # inside it's own

@@ -1,21 +1,45 @@
 module Cycle
 
-  @@path
+  @@tasks = Array.new
+  @@active
 
-  # run a cycle
-  # called from without
-  def self.go! name
-    @@path = "#$src/cycle/#{name}" 
-    require_relative "#@@path/run"
+  def self.do! name
   end
 
-  # run a phase
-  # called from within
-  def go! name = nil
-    path = "#@@path/phase/#{name}.rb"
-    unless name.nil? or !File.file? path
-      require_relative path
-    end
+  def do! name
+  end
+
+  # skip current cycle / phase
+  # and delete it's log block
+  def skip!
+    Msg.del
+    raise :skip
+  end
+  def get token
+    @@field[token]
+  end
+
+  def set token, value
+    @@field[token] = value
+  end
+
+  # delete entry
+  def del
+    Msg.del
+  end
+
+  # new entry
+  def new
+    Msg.new
+  end
+  # error
+  def err str = nil
+    Msg.err
+  end
+
+  # all complete
+  def oki
+    Msg.oki
   end
 
 end

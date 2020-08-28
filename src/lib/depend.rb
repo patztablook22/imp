@@ -10,8 +10,6 @@ class Depend
 
   def self.init
 
-    Console.log("dependency")
-
     tmp = []
 
     @@tries.each do |try|
@@ -27,9 +25,11 @@ class Depend
     @package = pkg
   end
 
-  def present?
+  def to_s
+    @package
+  end
 
-    Console.log("dependency", @package)
+  def present?
 
     command = String.new
     command << "find "

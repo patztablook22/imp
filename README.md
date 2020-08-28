@@ -76,7 +76,7 @@ aura package --root my/fake/root
 ```
 
 ## Config
-Default config location: `GIT_BASE/config.txt` \
+Default config location: `GIT/config.txt` \
 That is, for the installer `~/.config/aura/config.txt` \
 It's being interpreted using the same internal PKGBUILD parser \
 hence the syntax, for example:
@@ -105,7 +105,7 @@ errs = /my/aura/error/file.txt
 **Steps**
   1. dependencies
   2. clone the repository into `~/.config/`
-  3. execute `GIT_BASE/aura`
+  3. execute `GIT/aura`
   4. you can link it into `/usr/bin/`
 
 # Development notes

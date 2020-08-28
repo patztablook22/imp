@@ -26,7 +26,7 @@ class Pkgbuild
     end
 
     missing.each do |it|
-      Console << it
+      Err << it
     end
 
     missing.none?
@@ -35,14 +35,16 @@ class Pkgbuild
 
   def << hash
     hash.each_pair do |key, val|
-      unless val.class == Array
-        val = [val]
-      end
-      @data[key] = val
+      self.[]=(key, val)
     end
   end
 
-  def [](target, auto = true)
+  def []=(key, val)
+    val = Array[val] unless val.class == Array
+    @data[key] = val
+  end
+
+  def [](target, auto = false)
 
     buf = []
 
@@ -70,7 +72,7 @@ class Pkgbuild
 
   end
 
-  def iterate &block
+  def each &block
     @data.each_pair do |key, val|
       yield(key, val)
     end

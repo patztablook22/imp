@@ -1,13 +1,18 @@
 #! /usr/bin/env ruby
 
+# main AURA script
+
 # AURA git root etc.
-$git = __dir__ + "/../"
+$git = File.expand_path __dir__ + "/../"
 $src = __dir__
 $lib = "#$src/lib"
 
+# don't do anything accidentally
+exit if ARGV.none?
+
 # require external libs
-require 'optparse'
 require 'fileutils'
+require 'digest'
 require 'open3'
 require 'net/http'
 require 'open-uri'
@@ -20,23 +25,6 @@ end
 # CTRL+C interrupt
 Signal.trap('INT') { puts; exit 1 }
 
-# initialize environment
-Cycle.go! "env"
-
-unless $env.todo
-
-  exit if $env.dump? or $env.toor?
-
-  $stderr.puts "provide (one) package as an argument!"
-  exit 1
-
-end
-
-Cycle.go! "install"
-exit
-# load the lifecycle
-if $env.find?
-  require_relative "#$src/cycle/browse"
-else
-  require_relative "#$src/cycle/install"
-end
+Task*  "init"
+Task*  "repo"
+Task*[ "pull", Env["todo"] ]
