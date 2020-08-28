@@ -1,20 +1,15 @@
 todo = Task["args"][0]
-Task> "search results"
-
-if todo.empty?
-  Err << "no keywords provided"
-  Task^1
-end
+Task> "Arch User Repository"
 
 index = Index.new todo
 
 if index.empty?
-  STDERR.puts "no results found"
+  Msg[-1] = "no packages found"
   exit
 end
 
 index.prepare!
 index.get do |pkg|
   buf = pkg["name"] + " (version " + pkg["version"] + ")"
-  puts buf
+  Msg[-1] = buf
 end

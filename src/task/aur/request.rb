@@ -20,8 +20,8 @@ if !File.directory? aurdir or Env["clean"]
 
   if pipe.err.start_with? "warning"
     FileUtils.rm_rf aurdir
-    Err << "package not found"
-    Task^1
+    Msg[-1] = "package not found"
+    exit
   end
 
 end

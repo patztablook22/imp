@@ -1,12 +1,23 @@
-pkgname = Task["args"][0]
-Task["pkgname"] = pkgname
+action = Task["args"][0]
+target = Task["args"][1]
 
-Task^1 if pkgname.empty?
-Task^1 if pkgname =~ /[^a-zA-Z0-9\-]/
+case action
+when "search"
+  Task*["search", target]
+  Task^0
+when "exists"
+when "install"
+else
+  Task^1
+end
 
-Task["aurdir"] = Env["temp"] + "/aurdir/" + pkgname
-Task["srcdir"] = Env["temp"] + "/srcdir/" + pkgname
-Task["pkgdir"] = Env["temp"] + "/pkgdir/" + pkgname
+Task^1 if target.empty?
+Task^1 if target =~ /[^a-zA-Z0-9\-]/
+
+Task["pkgname"] = target
+Task["aurdir" ] = Env["temp"] + "/aurdir/" + target
+Task["srcdir" ] = Env["temp"] + "/srcdir/" + target
+Task["pkgdir" ] = Env["temp"] + "/pkgdir/" + target
 
 Task* "request"
 Task* "depends"

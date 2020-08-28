@@ -22,16 +22,28 @@ module Msg
   @@quiet = true
   ##
 
+  # supress messages
   def self.quiet= val
     @@quiet = val
   end
 
+  # update message
+  #
+  # Msg[-1] = "general"  => unstructurized print
+  # Msg[0]  = "collect"  => update head
+  # Msg[1]  = "bananas"  => update body
+  #
   def self.[]= index, str
-    for i in (index..2)
-      @@data[i] = ""
+    if index == -1
+      del
+      puts str
+    else
+      for i in (index..2)
+        @@data[i] = ""
+      end
+      @@data[index] = str.to_s
+      go! unless index == 0 and true
     end
-    @@data[index] = str.to_s
-    go! unless index == 0 and true
   end
 
   def self.err
