@@ -5,7 +5,7 @@ Access multiple repositories _(further development needed)_ using simple interfa
 ## Automatic installation
 
 ```bash
-curl -s https://raw.githubusercontent.com/patztablook22/imp/master/install.sh | bash
+curl -s https://patztablook22.github.io/imp/install.sh | bash
 ```
 
 ## Guide
