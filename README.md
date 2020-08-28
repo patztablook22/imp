@@ -1,4 +1,4 @@
-# imp!
+# <!--S-->imp!
 Linux **cross-distro** Intelligent Package Manager. \
 Access multiple repositories _(further development needed)_ using simple interface.
 
