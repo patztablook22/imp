@@ -11,6 +11,12 @@ pipe = Pipe.go! "git pull"
   Debug> pipe.err
 =end
 
+# exit if no other action necessary
+
+Msg.oki if Env["todo"].empty?
+
+# restart itself
+
 args = String.new
 
 Env.each do |key|
