@@ -28,7 +28,7 @@ Env["clean", "", ""]
 Env["...clean install"]
 
 Env["env", "", "export"]
-Env["...import / export imp env"]
+Env["...export imp env"]
 
 Env["todo", "", ""]
 Env["...todo, but option format"]

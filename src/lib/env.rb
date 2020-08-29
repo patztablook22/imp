@@ -156,44 +156,49 @@ module Env
   # export env
   def self.to_s
 
-    unlisted = [ "env", "todo" ]
-
     buf = String.new
     @@data.each do |key, var|
 
       val = var.get
+      val = val.join(" ") if val.class == Array
 
-      next if unlisted.include? key or val.to_s.empty?
+      next if key == "env3" or val.to_s.empty?
 
-      val  = val.join(" ") if val.class == Array
       buf << Term.tab(key, longest, true) << " = "
       buf << val.to_s
       buf << "\n"
 
     end
+
     buf
+
   end
 
-  # import environment from parseable object
-  # object.parse should return Hash
+  def self.each &block
+    @@data.each_key do |key|
+      yield key
+    end
+  end
+
+  # import environment
   def self.<< import
 
     return if import.nil?
 
     if import.class == String
-      return
+      parser = Parser.new import
+      data   = parser.data
+    else
+      data   = import.parse
     end
 
-    data = import.parse
     return if data.nil?
 
     Var.bump!
 
     data.each do |key, val|
-
       val = val[0] if val.class == Array and val.size == 1
       self[key, val]
-
     end
 
   end

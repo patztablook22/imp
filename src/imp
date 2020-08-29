@@ -20,15 +20,11 @@ Dir["#$lib/*"].each do |file|
 end
 
 # CTRL+C interrupt
-Signal.trap('INT') { puts; exit 1 }
+Signal.trap('INT') { puts; exit 130 }
 
 # early option processing
-
-Debug.on! if ARGV.include? "--debug"
+Debug.on! if ARGV.include? "--debug" 
 ARGV << "--help" if ARGV.none?
-#Env  << ARGV.find do |it|
-#  it =~ /--environment=*/
-#end&.split("=", 1)
 
 # initialize lifecycle
 Task* "imp"

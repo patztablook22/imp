@@ -12,5 +12,6 @@ index.prepare!
 index.get do |pkg|
   buf = pkg["name"] + " (version " + pkg["version"] + ")"
   Msg[-1] = buf
-  exit
 end
+
+exit

@@ -25,5 +25,5 @@ Task* "sources"
 Task* "makepkg"
 
 Task^0 if Env["keep"]
-Task> pkgname
+Task> target
 Task*["export", Task["pkgdir"]]

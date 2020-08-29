@@ -7,14 +7,16 @@ class Parser
   @buff
   @comment
 
-  def initialize path
+  def initialize object
 
-    file = File.open(path, 'r') rescue return
+    @data = Hash[]
+    @buff = Array[""]
 
-    @data = Hash.new
-    @buff = [""]
+    if object.class == File
+      object = object.read
+    end
 
-    file.each_char do |ch|
+    object.each_char do |ch|
       push ch
     end
 
@@ -23,7 +25,7 @@ class Parser
   end
 
   private
-  
+
   def push ch
 
     case ch

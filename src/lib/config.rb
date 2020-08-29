@@ -7,7 +7,7 @@ module Config
   end
 
   def self.parse
-    parser = Parser.new to_s
+    parser = Parser.new File.new(to_s)
     return parser.data
   end
 

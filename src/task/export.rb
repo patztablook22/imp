@@ -1,4 +1,7 @@
-pkgdir = Task["args"][0]
+pkgdir  = Task["args"][0]
+pkgname = File.basename pkgdir
+
+Task> pkgname
 
 pipe = Pipe.go! "sudo cp -r '#{pkgdir}/.' /"
 pipe.go!
