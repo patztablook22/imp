@@ -8,17 +8,9 @@ Access multiple repositories _(further development needed)_ using simple interfa
 curl -s https://patztablook22.github.io/imp/install.sh | bash
 ```
 
-## Guide
-```bash
-# print help
-imp --help
+## Documentation
 
-# install package
-imp package
-
-# search for package
-imp --find package
-```
+See [imp! gitbook](https://patz.gitbook.io/imp/)
 
 ## Manual installation
 
