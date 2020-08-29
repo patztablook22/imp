@@ -1,4 +1,0 @@
-extend Phase
-
-log "CHECKSUM"
-
