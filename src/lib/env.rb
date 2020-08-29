@@ -162,7 +162,7 @@ module Env
       val = var.get
       val = val.join(" ") if val.class == Array
 
-      next if key == "env3" or val.to_s.empty?
+      next if key == "env" or val.to_s.empty?
 
       buf << Term.tab(key, longest, true) << " = "
       buf << val.to_s

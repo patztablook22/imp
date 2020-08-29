@@ -27,7 +27,7 @@ Env["...don't export package"]
 Env["clean", "", ""]
 Env["...clean install"]
 
-Env["env", "", "export"]
+Env["env", "", true]
 Env["...export imp env"]
 
 Env["todo", "", ""]
@@ -51,7 +51,7 @@ if Env["help"]
   exit
 end
 
-if Env["env"] == "export"
+if Env["env"] == "true"
   puts Env
   exit
 end
