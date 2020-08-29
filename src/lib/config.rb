@@ -7,7 +7,8 @@ module Config
   end
 
   def self.parse
-    parser = Parser.new File.new(to_s)
+    file = File.new(to_s) rescue return
+    parser = Parser.new file
     return parser.data
   end
 
