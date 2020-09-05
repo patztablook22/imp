@@ -2,7 +2,7 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ebd51048d4bb4c5983c2f68d3797f4e6)](https://app.codacy.com/manual/patztablook22/imp?utm_source=github.com&utm_medium=referral&utm_content=patztablook22/imp&utm_campaign=Badge_Grade_Dashboard)
 
-Linux **cross-distro** Intelligent Package Manager. \
+Linux **cross-distro** Intelligent Manager for **all** Packages. \
 Access multiple repositories _(further development needed)_ using simple interface.
 
 ## Automatic installation
