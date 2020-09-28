@@ -15,7 +15,7 @@
 # else error
 
 
-main = "/src/imp"
+main = "/src/main"
 path = Array.new
 
 # inside it's own

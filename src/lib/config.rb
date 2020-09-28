@@ -1,15 +1,17 @@
-require_relative 'parser'
+require_relative 'progress/parser'
 
 module Config
 
-  def self.to_s
+  extend self
+
+  def to_s
     "#$git/config.txt"
   end
 
-  def self.parse
+  def parse
     file = File.new(to_s) rescue return
     parser = Parser.new file
-    return parser.data
+    parser.data
   end
 
 end

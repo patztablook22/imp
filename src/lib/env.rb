@@ -1,21 +1,29 @@
+require_relative 'cli'
 require_relative 'var'
 
 module Env
+
+  extend self
 
   # data
   @@data = {
 
     "help"         =>    Boolean.new,
+    "list"         =>    Boolean.new,
     "search"       =>    Boolean.new,
-    "imp-upgrade"  =>    Boolean.new,
-    "depend"       =>       List.new,
+    "info"         =>    Boolean.new,
+    "remove"       =>    Boolean.new,
+    "upgrade"      =>    Boolean.new,
+    # "depend"       =>       List.new,
+    "tui"          =>    Boolean.new,
     "verbose"      =>     Abacus.new,
     "local"        =>       Text.new,
     "temp"         =>       Text.new,
     "keep"         =>    Boolean.new,
     "clean"        =>    Boolean.new,
     "todo"         =>       Text.new,
-    "env"          =>       Text.new,
+    "env"          =>    Boolean.new,
+    "plugin"       =>    Boolean.new,
     "debug"        =>    Boolean.new,
 
   }
@@ -46,7 +54,7 @@ module Env
   # Env["-t"] => "change"
   #
   #
-  def self.[] *args
+  def [] *args
 
     if args[0] =~ /\A\.\./
 
@@ -108,7 +116,7 @@ module Env
   end
 
   # dump var help
-  def self.helpVar token
+  def helpVar token
 
     var = @@data[token]
     buf = String.new
@@ -121,7 +129,7 @@ module Env
       buf << "  -#{var.opt},"
     end
 
-    buf << " --" << Msg.tab(token, longest + 4)
+    buf << " --" << Cli.tab(token, longest + 4)
     buf << var.man
     buf << "\n"
 
@@ -130,7 +138,7 @@ module Env
   end
 
   # dump all help
-  def self.help
+  def help
 
     buf = String.new
     buf << "imp [options] todo\n"
@@ -154,7 +162,7 @@ module Env
   end
 
   # export env
-  def self.to_s
+  def to_s
 
     buf = String.new
     @@data.each do |key, var|
@@ -164,7 +172,7 @@ module Env
 
       next if key == "env" or val.to_s.empty?
 
-      buf << Term.tab(key, longest, true) << " = "
+      buf << Cli.tab(key, longest, true) << " = "
       buf << val.to_s
       buf << "\n"
 
@@ -174,14 +182,14 @@ module Env
 
   end
 
-  def self.each &block
+  def each &block
     @@data.each_key do |key|
       yield key
     end
   end
 
   # import environment
-  def self.<< import
+  def << import
 
     return if import.nil?
 
@@ -205,7 +213,7 @@ module Env
 
   private
 
-  def self.longest
+  def longest
     tmp = 0
     @@data.each_key do |key|
       len = key.length
