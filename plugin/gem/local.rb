@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 buf = Array.new
 
 pipe = Pipe.go! "gem list --quiet"

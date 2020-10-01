@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 asset 'request'
 asset 'depends'
 asset 'sources'

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 asset 'inner_html'
 
 buf = Array.new

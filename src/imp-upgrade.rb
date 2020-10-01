@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 unless Cache["upgraded"]
 
   # pull from git

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 todo = Task?[0]
 Task> "Arch User Repository"
 

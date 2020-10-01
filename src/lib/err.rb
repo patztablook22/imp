@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # module for easier "low-level" error handling
 # every action using it should call Err.new
 # Err.ed? to check whether any error occured

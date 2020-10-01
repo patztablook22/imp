@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 file = Task?[0][0]
 hash = Task?[0][1]
 

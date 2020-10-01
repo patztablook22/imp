@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 def depends pkgbuild
 
   depends  = Array.new

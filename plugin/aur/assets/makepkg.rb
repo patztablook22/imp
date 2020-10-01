@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 def makepkg pkgbuild
 
   srcdir   = pkgbuild["srcdir"][0]

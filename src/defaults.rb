@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 Env["help", false]
 Env["...print help", "h"]
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Block
 
   @tl  # position top left [line, col]

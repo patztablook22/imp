@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Log < Block
 
   def initialize

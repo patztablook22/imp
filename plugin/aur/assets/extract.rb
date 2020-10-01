@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 file = Task?[0]
 dir  = File.dirname file
 base = file
