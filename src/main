@@ -158,7 +158,7 @@ when Env['remove']
   ar = Hash.new
 
   Plugin.each do |plug|
-    ar = {plug.name => nil}.merge ar
+    ar = { plug.name => nil }.merge ar
   end
 
   Local.list.each do |pkg|

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class Navi < Block
 
-  @@global = {'^C' => 'quit'}
+  @@global = { '^C' => 'quit' }
 
   def update data
     if data.nil?

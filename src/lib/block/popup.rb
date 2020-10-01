@@ -32,7 +32,7 @@ class Popup < Frame
     @head    = data[0]
     @body    = data[1]
     @actions = data[2]
-    @actions = {false => @actions} if @actions.class == Proc
+    @actions = { false => @actions } if @actions.class == Proc
   end
 
   def click pos
