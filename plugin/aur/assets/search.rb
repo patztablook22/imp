@@ -2,7 +2,7 @@
 todo = Task?[0]
 Task> 'Arch User Repository'
 
-buf   = Array.new
+buf   = []
 
 begin
 

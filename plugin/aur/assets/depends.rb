@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 def depends pkgbuild
 
-  depends  = Array.new
+  depends  = []
   depends += pkgbuild['depends']
   depends += pkgbuild['makedepends']
 

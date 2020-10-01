@@ -5,7 +5,7 @@ module Options
 
   def self.parse
 
-    data = Hash.new
+    data = {}
 
     ARGV.each do |arg|
       if arg =~ /\A--/

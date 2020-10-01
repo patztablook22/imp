@@ -28,10 +28,10 @@ module App
   }
 
   @@frames = Array.new(3, Frame.new)
-  @@popups = Array.new
+  @@popups = []
 
   @@navi   = Navi .new
-  @@focus  = Array.new  # focused block history
+  @@focus  = []  # focused block history
 
   def init tui
 
@@ -79,7 +79,7 @@ module App
     }
   end
 
-  def popup head, body, actions = Hash.new
+  def popup head, body, actions = {}
     return unless tui?
     @@popups << Popup.new
     @@focus  << @@popups[-1]

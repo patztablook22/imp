@@ -6,7 +6,7 @@
 
 module Err
 
-  @@data = Array.new
+  @@data = []
 
   # log a message
   # e.g. "missing constant X"
@@ -21,7 +21,7 @@ module Err
   end
 
   def self.new
-    @@data = Array.new
+    @@data = []
   end
 
   def self.ed?

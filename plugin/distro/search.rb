@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 asset 'pm'
 
-buf = Array.new
+buf = []
 
 case pm
 when 'xbps'

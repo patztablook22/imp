@@ -17,7 +17,7 @@
 
 
 main = '/src/main'
-path = Array.new
+path = []
 
 # inside it's own
 path << __dir__ + main

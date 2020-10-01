@@ -5,7 +5,7 @@ class Debug < Block
 
   @@active = false    # debug mode active
   @@used   = false    # has it been used?
-  @@data   = Array.new
+  @@data   = []
 
   # print debug message (if set on)
   #

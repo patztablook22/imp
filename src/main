@@ -155,7 +155,7 @@ when Env['remove']
 
   # find appropriate plugin
 
-  ar = Hash.new
+  ar = {}
 
   Plugin.each do |plug|
     ar = { plug.name => nil }.merge ar
@@ -167,7 +167,7 @@ when Env['remove']
     end
   end
 
-  plugin = ar.find{ |k, v| v == true }.to_a[0]
+  plugin = ar.find { |k, v| v == true }.to_a[0]
 
   # use the plugin
 
@@ -183,7 +183,7 @@ else                      # install
 
   # find appropriate plugin
 
-  ar = Hash.new
+  ar = {}
 
   Plugin.each do |plug|
     ar.merge! plug.name => nil

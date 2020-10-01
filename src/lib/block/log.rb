@@ -2,7 +2,7 @@
 class Log < Block
 
   def initialize
-    @data = Array.new
+    @data = []
   end
 
   def update data

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-buf = Array.new
+buf = []
 
 pipe = Pipe.go! 'xbps-query -l'
 pipe.out.each_line do |line|

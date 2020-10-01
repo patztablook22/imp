@@ -5,7 +5,7 @@ module Local
 
   extend self
 
-  @@all = Array.new
+  @@all = []
 
   def init
     @@all.clear

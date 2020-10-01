@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class Plugin
 
-  @@all = Array.new
+  @@all = []
   @@dir = nil
 
   def self.init
@@ -25,7 +25,7 @@ class Plugin
   end
 
   def self.method_missing action, *args, &hook
-    buf = Array.new
+    buf = []
     each do |plug|
       buf << plug.send(action, *args, &hook)
     end
@@ -82,7 +82,7 @@ class Plugin
                  r = run(action, args[0])
                  r = case r
                      when NilClass
-                       Array.new
+                       []
                      when Array
                        r
                      else

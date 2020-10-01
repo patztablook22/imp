@@ -32,7 +32,7 @@ module Cache
   private
 
   def get
-    @@data = Hash.new
+    @@data = {}
     file   = File.new(to_s) rescue return
     parser = Parser.new file
     @@data = parser.data

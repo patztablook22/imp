@@ -85,8 +85,8 @@ class Block
 
   def set tl, br, &child
 
-    @tl = Array.new
-    @br = Array.new
+    @tl = []
+    @br = []
 
     @tl[0] = @@tlContext[0] + tl[0]
     @tl[1] = @@tlContext[1] + tl[1]

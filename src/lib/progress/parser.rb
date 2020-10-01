@@ -113,7 +113,7 @@ class Parser
 
   def format
 
-    buff = Hash.new
+    buff = {}
     @data.each_pair do |key, val|
 
       if key.end_with? '()'

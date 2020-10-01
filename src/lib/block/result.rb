@@ -2,7 +2,7 @@
 class Result < Block
 
   def initialize
-    @data = Array.new
+    @data = []
     @pos  = 0
     @top  = 0
   end
@@ -105,7 +105,7 @@ class Result < Block
       if pkg = @data[@pos]
 
         state   = ''
-        actions = Hash.new
+        actions = {}
         install = -> {
           App.tab 'install'
           Plugin[pkg.plugin].install pkg.name

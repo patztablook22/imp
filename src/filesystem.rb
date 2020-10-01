@@ -2,7 +2,7 @@
 # forbid using any of these
 # to prevent important data loss
 
-dangerous = Array.new
+dangerous = []
 filetrees = [
   $git,
   ENV['HOME'] + '/.config',

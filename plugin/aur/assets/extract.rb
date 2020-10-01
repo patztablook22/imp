@@ -2,7 +2,7 @@
 file = Task?[0]
 dir  = File.dirname file
 base = file
-exts = Array.new
+exts = []
 
 while base =~ /\./
 

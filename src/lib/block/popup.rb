@@ -25,7 +25,7 @@ class Popup < Frame
   def initialize
     super
     @index   = 0
-    @actions = Hash.new
+    @actions = {}
   end
 
   def update *data
