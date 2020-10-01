@@ -18,14 +18,14 @@ See [imp! gitbook](https://patz.gitbook.io/imp/)
 ## Manual installation
 
 **Dependencies**
-  - git
-  - ruby
-  - tar
-  - binutils
-  - xz
+- git
+- ruby
+- tar
+- binutils
+- xz
   
 **Steps**
-  1. dependencies
-  2. clone the repository into `~/.config/`
-  3. execute `GIT/imp`
-  4. you can link it into `/usr/bin/` or other `$PATH`
+1. dependencies
+2. clone the repository into `~/.config/`
+3. execute `GIT/imp`
+4. you can link it into `/usr/bin/` or other `$PATH`

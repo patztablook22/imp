@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative 'cli'
 require_relative 'var'
 
@@ -8,23 +9,23 @@ module Env
   # data
   @@data = {
 
-    "help"         =>    Boolean.new,
-    "list"         =>    Boolean.new,
-    "search"       =>    Boolean.new,
-    "info"         =>    Boolean.new,
-    "remove"       =>    Boolean.new,
-    "upgrade"      =>    Boolean.new,
+    'help'         =>    Boolean.new,
+    'list'         =>    Boolean.new,
+    'search'       =>    Boolean.new,
+    'info'         =>    Boolean.new,
+    'remove'       =>    Boolean.new,
+    'upgrade'      =>    Boolean.new,
     # "depend"       =>       List.new,
-    "tui"          =>    Boolean.new,
-    "verbose"      =>     Abacus.new,
-    "local"        =>       Text.new,
-    "temp"         =>       Text.new,
-    "keep"         =>    Boolean.new,
-    "clean"        =>    Boolean.new,
-    "todo"         =>       Text.new,
-    "env"          =>    Boolean.new,
-    "plugin"       =>    Boolean.new,
-    "debug"        =>    Boolean.new,
+    'tui'          =>    Boolean.new,
+    'verbose'      =>     Abacus.new,
+    'local'        =>       Text.new,
+    'temp'         =>       Text.new,
+    'keep'         =>    Boolean.new,
+    'clean'        =>    Boolean.new,
+    'todo'         =>       Text.new,
+    'env'          =>    Boolean.new,
+    'plugin'       =>    Boolean.new,
+    'debug'        =>    Boolean.new,
 
   }
 
@@ -60,7 +61,7 @@ module Env
 
       raise if @@last.nil?
 
-      man = args[0].gsub(/\A\.+/, "")
+      man = args[0].gsub(/\A\.+/, '')
       opt = args[1]
 
       @@data[@@last].man = man
@@ -74,7 +75,7 @@ module Env
     value = args[1]
     empty = args[2]
 
-    if token[0] == "-"
+    if token[0] == '-'
 
       token = token[1..-1]
       found = nil
@@ -121,15 +122,15 @@ module Env
     var = @@data[token]
     buf = String.new
 
-    return "" if var.nil? or var.man.nil?
+    return '' if var.nil? or var.man.nil?
 
     if var.opt.nil?
-      buf << "     "
+      buf << '     '
     else
       buf << "  -#{var.opt},"
     end
 
-    buf << " --" << Cli.tab(token, longest + 4)
+    buf << ' --' << Cli.tab(token, longest + 4)
     buf << var.man
     buf << "\n"
 
@@ -148,8 +149,8 @@ module Env
       buf << helpVar(key)
     end
 
-    if Env["verbose"] == 0
-      buf << "(verbose for more)"
+    if Env['verbose'] == 0
+      buf << '(verbose for more)'
       return buf
     end
 
@@ -168,11 +169,11 @@ module Env
     @@data.each do |key, var|
 
       val = var.get
-      val = val.join(" ") if val.class == Array
+      val = val.join(' ') if val.class == Array
 
-      next if key == "env" or val.to_s.empty?
+      next if key == 'env' or val.to_s.empty?
 
-      buf << Cli.tab(key, longest, true) << " = "
+      buf << Cli.tab(key, longest, true) << ' = '
       buf << val.to_s
       buf << "\n"
 

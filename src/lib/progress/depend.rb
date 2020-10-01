@@ -1,11 +1,12 @@
+# frozen_string_literal: true
 class Depend
 
   @package
   @@tries = [
-    "/usr/bin",
-    "/usr/lib",
-    "/usr/lib32",
-    "/usr/lib64",
+    '/usr/bin',
+    '/usr/lib',
+    '/usr/lib32',
+    '/usr/lib64',
   ]
 
   def self.init
@@ -32,11 +33,11 @@ class Depend
   def present?
 
     command = String.new
-    command << "find "
+    command << 'find '
     @@tries.each do |try|
-      command << try << " "
+      command << try << ' '
     end
-    command << "-iname "
+    command << '-iname '
 
     dissolve do |it|
 
@@ -59,7 +60,7 @@ class Depend
 
     yield @package
 
-    parts = @package.split("-")
+    parts = @package.split('-')
     return if parts.size < 1
 
     parts.each { |part| yield part }

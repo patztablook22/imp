@@ -1,12 +1,13 @@
+# frozen_string_literal: true
 asset 'inner_html'
 
-buf = Array.new
+buf = []
 
 begin
 
   key  = URI.encode_www_form_component(arg)
   url  = "https://aur.archlinux.org/packages/?O=0&PP=250&K=#{key}"
-  url += "&SeB=n"
+  url += '&SeB=n'
   uri  = URI.parse(url)
   doc  = uri.open.read
 
@@ -19,7 +20,7 @@ begin
   doc = doc[0 .. pos - 1]
 
   doc.strip!
-  doc = doc.split("</tr>")
+  doc = doc.split('</tr>')
 
   doc.each do |tr|
     tr.strip!

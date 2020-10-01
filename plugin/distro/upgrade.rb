@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 pkgers = {
 
-  "apt"     => "apt-get",
-  "pacman"  => "pacman",
-  "dnf"     => "dnf-install",
-  "yum"     => "yum",
-  "xbps"    => "xbps-install",
+  'apt'     => 'apt-get',
+  'pacman'  => 'pacman',
+  'dnf'     => 'dnf-install',
+  'yum'     => 'yum',
+  'xbps'    => 'xbps-install',
 
 }
 
@@ -17,4 +18,4 @@ distro = pkgers.find do |pkger, cmd|
   end
 end
 
-Cache["distro"] = distro[0]
+Cache['distro'] = distro[0]

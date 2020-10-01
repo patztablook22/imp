@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative 'frame'
 
 class Popup < Frame
@@ -24,14 +25,14 @@ class Popup < Frame
   def initialize
     super
     @index   = 0
-    @actions = Hash.new
+    @actions = {}
   end
 
   def update *data
     @head    = data[0]
     @body    = data[1]
     @actions = data[2]
-    @actions = {false => @actions} if @actions.class == Proc
+    @actions = { false => @actions } if @actions.class == Proc
   end
 
   def click pos
@@ -95,7 +96,7 @@ class Popup < Frame
       line.strip!
       next if line.empty?
       if line.length > @w - 6
-        line = line[0..@w - 10] + "..."
+        line = line[0..@w - 10] + '...'
       end
       move [4 + number, 3]
       out line, false
@@ -113,8 +114,8 @@ class Popup < Frame
       @actions.keys.each_with_index do |opt, index|
 
         opt = case opt
-              when true;  "YES"
-              when false; "NO"
+              when true;  'YES'
+              when false; 'NO'
               end
 
         if @index == index
@@ -141,9 +142,9 @@ class Popup < Frame
 
       Curses.attron Curses.color_pair 2
       if @index == 0
-        out " ", false
+        out ' ', false
       else
-        out "<", false
+        out '<', false
       end
       Curses.attroff Curses.color_pair 2
 
@@ -155,9 +156,9 @@ class Popup < Frame
 
       Curses.attron Curses.color_pair 2
       if @index == @actions.size - 1
-        out " ", false
+        out ' ', false
       else
-        out ">", false
+        out '>', false
       end
       Curses.attroff Curses.color_pair 2
 

@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 file = Task?[0]
 dir  = File.dirname file
 base = file
-exts = Array.new
+exts = []
 
 while base =~ /\./
 
@@ -16,13 +17,13 @@ end
 
 command = String.new
 
-if exts.include? "tar"
-  command << "tar -"
-  command << "z" if exts.any? { |it| it=~ /.z/ and it != "xz" }
-  command << "xf "
+if exts.include? 'tar'
+  command << 'tar -'
+  command << 'z' if exts.any? { |it| it=~ /.z/ and it != 'xz' }
+  command << 'xf '
   command << file
-elsif exts.include? "deb"
-  command << "ar -x "
+elsif exts.include? 'deb'
+  command << 'ar -x '
   command << file
 end
 

@@ -1,9 +1,10 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: true
 
 # imp main script
 
 # git root dir shortcut
-$git = File.expand_path __dir__ + "/../"
+$git = File.expand_path __dir__ + '/../'
 
 # require external libs
 
@@ -31,8 +32,8 @@ end
 Signal.trap('INT') { puts; App.quit }
 
 # early option processing
-Debug.on! if ARGV.include? "--debug" 
-ARGV << "--tui" if ARGV.none?
+Debug.on! if ARGV.include? '--debug' 
+ARGV << '--tui' if ARGV.none?
 
 # default environment
 require_relative 'defaults'
@@ -45,12 +46,12 @@ Cli.err if Err.ed?
 
 # upgrade imp!
 
-if Env["upgrade"]
+if Env['upgrade']
 
   require_relative 'imp-upgrade'
   
-  App.tab "intro"
-  App.init Env["tui"]
+  App.tab 'intro'
+  App.init Env['tui']
   Plugin.init
 
   Plugin.each.each_with_index do |plug, i|
@@ -60,17 +61,17 @@ if Env["upgrade"]
 
   App.intro
 
-elsif Cache["intro"].nil?
+elsif Cache['intro'].nil?
 
-  App.tab "intro"
-  App.init Env["tui"]
+  App.tab 'intro'
+  App.init Env['tui']
   Plugin.init
   App.intro
 
 else
 
-  App.tab "search"
-  App.init Env["tui"]
+  App.tab 'search'
+  App.init Env['tui']
   Plugin.init
 
 end
@@ -81,36 +82,36 @@ require_relative 'filesystem'
 Cli.err if Err.ed?
 
 
-if Env["help"]           # print help
+if Env['help']           # print help
 
   puts Env.help
   exit
 
-elsif Env["env"]         # print environment
+elsif Env['env']         # print environment
 
   puts Env
   exit
 
 elsif [
-  Env["plugin"],
-  Env["list"],
-  Env["search"],
-  Env["info"],
-  Env["remove"],
+  Env['plugin'],
+  Env['list'],
+  Env['search'],
+  Env['info'],
+  Env['remove'],
 ].count(true) > 1        # too many actions
 
   puts Env.help
   exit
 
-elsif Env["plugin"]      # list plugins
+elsif Env['plugin']      # list plugins
 
   Plugin.init
   Plugin.each do |p|
-    Cli[-1] = Cli.tab(p.name, 8) + " =>   " + Cli.tab(p.desc, 0)
+    Cli[-1] = Cli.tab(p.name, 8) + ' =>   ' + Cli.tab(p.desc, 0)
   end
   exit
 
-elsif Env["list"]        # list local packages
+elsif Env['list']        # list local packages
 
   Plugin.init
   Local.init
@@ -131,14 +132,14 @@ when App.tui?            # wait for user input
   #Plugin["aur"].install "kewl"
   sleep 1 while true
 
-when Env["todo"].empty?  # no target specified
+when Env['todo'].empty?  # no target specified
 
-  App.quit if Env["upgrade"]
+  App.quit if Env['upgrade']
   Cli[-1] = Env.help
 
-when Env["search"]       # search
+when Env['search']       # search
 
-  th = Plugin.search( Env["todo"] ) do |res|
+  th = Plugin.search( Env['todo'] ) do |res|
     res.each do |pkg|
       Cli[-1] = "#{pkg.name}-#{pkg.version}"
     end
@@ -148,45 +149,45 @@ when Env["search"]       # search
     App.quit if th.none? { |t| t.status }
   end
 
-when Env["info"]
+when Env['info']
 
-when Env["remove"]
+when Env['remove']
 
   # find appropriate plugin
 
-  ar = Hash.new
+  ar = {}
 
   Plugin.each do |plug|
-    ar = {plug.name => nil}.merge ar
+    ar = { plug.name => nil }.merge ar
   end
 
   Local.list.each do |pkg|
-    if pkg.name == Env["todo"]
+    if pkg.name == Env['todo']
       ar[pkg.plugin] = true
     end
   end
 
-  plugin = ar.find{ |k, v| v == true }.to_a[0]
+  plugin = ar.find { |k, v| v == true }.to_a[0]
 
   # use the plugin
 
   if plugin.nil?
-    Cli[-1] = "package not installed"
+    Cli[-1] = 'package not installed'
     App.quit 1
   end
 
   p plugin
-  Plugin[plugin].remove Env["todo"]
+  Plugin[plugin].remove Env['todo']
 
 else                      # install
 
   # find appropriate plugin
 
-  ar = Hash.new
+  ar = {}
 
   Plugin.each do |plug|
     ar.merge! plug.name => nil
-    plug.exists Env["todo"] do |res|
+    plug.exists Env['todo'] do |res|
       ar[plug.name] = res
     end
   end
@@ -213,7 +214,7 @@ else                      # install
     case plugin
     when nil
     when false
-      Cli[-1] = "package not found"
+      Cli[-1] = 'package not found'
       App.quit 1
     else
       break
@@ -224,7 +225,7 @@ else                      # install
   # use the plugin
 
   p plugin
-  Plugin[plugin].install Env["todo"]
+  Plugin[plugin].install Env['todo']
 
 end
 

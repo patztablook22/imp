@@ -1,11 +1,12 @@
+# frozen_string_literal: true
 file = Task?[0][0]
 hash = Task?[0][1]
 
-func = case Task["checksum"]
-       when "sha128sum"; Digest::SHA128
-       when "sha256sum"; Digest::SHA256
-       when "sha512sum"; Digest::SHA512
-       when    "md5sum"; Digest::MD5
+func = case Task['checksum']
+       when 'sha128sum'; Digest::SHA128
+       when 'sha256sum'; Digest::SHA256
+       when 'sha512sum'; Digest::SHA512
+       when    'md5sum'; Digest::MD5
        else; Task^1
        end
 

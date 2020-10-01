@@ -1,4 +1,5 @@
-buf = Array.new
+# frozen_string_literal: true
+buf = []
 
 pipe = Pipe.go! "gem search \"#{arg}\" --quiet"
 pipe.out&.each_line do |line|

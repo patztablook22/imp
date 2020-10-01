@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 class Result < Block
 
   def initialize
-    @data = Array.new
+    @data = []
     @pos  = 0
     @top  = 0
   end
@@ -17,14 +18,14 @@ class Result < Block
 
     when Symbol
 
-      if Env["tui"]
-        App.popup "network error", "Check your connection..."
+      if Env['tui']
+        App.popup 'network error', 'Check your connection...'
       else
-        Cli[-1] = "network error"
+        Cli[-1] = 'network error'
       end
 
     when Array
-      unless Env["tui"]
+      unless Env['tui']
         data.each do |pkg|
           Cli[-1] = "#{pkg.name} (version #{pkg.version})"
         end
@@ -67,11 +68,11 @@ class Result < Block
   def key ch
     case ch
     when :escape
-      App.focus "search"
+      App.focus 'search'
       return
     when :key_up
       if @data.none? or @pos == 0 or @pos.nil?
-        App.focus "search"
+        App.focus 'search'
         return
       end
       @pos -= 1
@@ -103,14 +104,14 @@ class Result < Block
 
       if pkg = @data[@pos]
 
-        state   = ""
-        actions = Hash.new
+        state   = ''
+        actions = {}
         install = -> {
-          App.tab "install"
+          App.tab 'install'
           Plugin[pkg.plugin].install pkg.name
         }
         remove = -> {
-          App.popup "remove", "Remove #{pkg.name}?", {
+          App.popup 'remove', "Remove #{pkg.name}?", {
             true  => -> { Plugin[pkg.plugin].remove pkg.name },
             false => -> {},
           }
@@ -120,18 +121,18 @@ class Result < Block
 
         case pkg.sync!
         when nil
-          state = "not installed"
-          actions["install"] = install
-          actions["cancel"]  = cancel
+          state = 'not installed'
+          actions['install'] = install
+          actions['cancel']  = cancel
         when false
-          state = "needs update"
-          actions["cancel"] = cancel
-          actions["update"] = install
-          actions["remove"] = remove
+          state = 'needs update'
+          actions['cancel'] = cancel
+          actions['update'] = install
+          actions['remove'] = remove
         when true
-          state = "up to date"
-          actions["cancel" ] = cancel
-          actions["remove"] = remove
+          state = 'up to date'
+          actions['cancel' ] = cancel
+          actions['remove'] = remove
         end
 
         body = "
@@ -201,8 +202,8 @@ class Result < Block
       Curses.attron Curses.color_pair(3) if highlight
       out name, false
       Curses.attron Curses::A_DIM
-      out " " * space + version
-      out "." * (@w - 2)
+      out ' ' * space + version
+      out '.' * (@w - 2)
       Curses.attroff Curses::A_DIM
       Curses.attroff Curses.color_pair(3) if highlight
 
@@ -221,7 +222,7 @@ class Result < Block
     if @data.none?
       for i in (0...@h)
         move [i, @w - 2]
-        out "  ", false
+        out '  ', false
       end
       return
     end
@@ -234,9 +235,9 @@ class Result < Block
       move [i, @w - 2]
       Curses.attron Curses.color_pair 4
       if i >= p and i <= p + h
-        out " █", false
+        out ' █', false
       else
-        out " │", false
+        out ' │', false
       end
       Curses.attroff Curses.color_pair 4
 
@@ -247,7 +248,7 @@ class Result < Block
   private
 
   def navi
-    App.navi "ENTER" => "install" 
+    App.navi 'ENTER' => 'install' 
   end
 
 end

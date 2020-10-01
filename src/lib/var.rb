@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Env
 
   # variable template
@@ -170,8 +171,8 @@ module Env
         @data = false
       when String
         val.downcase!
-        @data = true  if val == "true"
-        @data = false if val == "false"
+        @data = true  if val == 'true'
+        @data = false if val == 'false'
       when Integer
         @data = val > 0
       end
@@ -200,7 +201,7 @@ module Env
       end
 
       if val.class == Array
-        val = val.join " "
+        val = val.join ' '
       end
 
       @data = val

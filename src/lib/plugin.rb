@@ -1,6 +1,7 @@
+# frozen_string_literal: true
 class Plugin
 
-  @@all = Array.new
+  @@all = []
   @@dir = nil
 
   def self.init
@@ -24,7 +25,7 @@ class Plugin
   end
 
   def self.method_missing action, *args, &hook
-    buf = Array.new
+    buf = []
     each do |plug|
       buf << plug.send(action, *args, &hook)
     end
@@ -52,16 +53,16 @@ class Plugin
     parser = Parser.new File.new(man)
 
     @name = name
-    @desc = parser.data["desc"][0]
-    @nice = parser.data["nice"][0]
-    @list = parser.data["list"]
+    @desc = parser.data['desc'][0]
+    @nice = parser.data['nice'][0]
+    @list = parser.data['list']
     @list = true if @list.nil?
     @dir  = "#@@dir/#@name"
 
     return unless @nice and @desc
 
     return unless [
-      "exists", "install", "search" # "plugin", "local", "remove" optional
+      'exists', 'install', 'search' # "plugin", "local", "remove" optional
     ].all? do |task|
       File.file? "#@@dir/#@name/#{task}.rb"
     end
@@ -74,14 +75,14 @@ class Plugin
 
     action = action.to_s
     result = case action
-             when "upgrade"
-               -> { run("upgrade") }
-             when "local", "search"
+             when 'upgrade'
+               -> { run('upgrade') }
+             when 'local', 'search'
                -> {
                  r = run(action, args[0])
                  r = case r
                      when NilClass
-                       Array.new
+                       []
                      when Array
                        r
                      else
@@ -91,18 +92,18 @@ class Plugin
                    pkg.plugin = name
                  end
                }
-             when "exists"
-               -> { run("exists", args[0]) == true }
-             when "install"
+             when 'exists'
+               -> { run('exists', args[0]) == true }
+             when 'install'
                -> {
                  run(action, args[0]) and \
-                 App.popup "done", "Successfully installed #{args[0]}", -> {
-                   App.tab "search"
+                 App.popup 'done', "Successfully installed #{args[0]}", -> {
+                   App.tab 'search'
                    nil while App.pupop
-                   App.focus "result"
+                   App.focus 'result'
                  }
                }
-             when "remove"
+             when 'remove'
                -> { run(action, args[0]) }
              end
 
@@ -138,9 +139,9 @@ class Plugin
     rescue Errno::ENOENT
     rescue => e
       yield e
-      App.popup "error", "restart", {
+      App.popup 'error', 'restart', {
         true  => -> { App.log; sleep 0.2; run action, arg  },
-        false => -> { App.tab "search"; App.focus "result" },
+        false => -> { App.tab 'search'; App.focus 'result' },
       }
       return false
     end

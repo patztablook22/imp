@@ -1,4 +1,5 @@
 #! /usr/bin/env ruby
+# frozen_string_literal: true
 
 # This script runs appropriate imp instance
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -15,8 +16,8 @@
 # else error
 
 
-main = "/src/main"
-path = Array.new
+main = '/src/main'
+path = []
 
 # inside it's own
 path << __dir__ + main
@@ -26,10 +27,10 @@ tmp = Dir.pwd
 begin
   path << tmp + main
   tmp = File.dirname tmp
-end until tmp == "/"
+end until tmp == '/'
 
 # default imp
-path << ENV["HOME"] + "/.config/imp" + main
+path << ENV['HOME'] + '/.config/imp' + main
 
 # get first valid path
 bin = path.find do |i|
@@ -43,9 +44,9 @@ if bin.nil?
 end
 
 # get current arguments
-args = ""
+args = ''
 ARGV.each do |arg|
-  args << " " << arg
+  args << ' ' << arg
 end
 
 # execute appropriate imp

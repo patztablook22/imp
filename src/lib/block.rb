@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Block
 
   @tl  # position top left [line, col]
@@ -42,7 +43,7 @@ class Block
 
   end
 
-  def out str = "", newline = true
+  def out str = '', newline = true
 
     return if @hide or @p[0] >= @h
     return if @p[1] >= @w
@@ -52,7 +53,7 @@ class Block
 
     if newline
 
-      Curses.addstr str + " " * (@w - @p[1] - str.length)
+      Curses.addstr str + ' ' * (@w - @p[1] - str.length)
 
       @p[0] += 1
       @p[1]  = 0
@@ -84,8 +85,8 @@ class Block
 
   def set tl, br, &child
 
-    @tl = Array.new
-    @br = Array.new
+    @tl = []
+    @br = []
 
     @tl[0] = @@tlContext[0] + tl[0]
     @tl[1] = @@tlContext[1] + tl[1]

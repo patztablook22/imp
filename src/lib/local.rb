@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 require_relative 'plugin'
 
 module Local
 
   extend self
 
-  @@all = Array.new
+  @@all = []
 
   def init
     @@all.clear
@@ -28,7 +29,7 @@ module Local
   private
 
   def impportAll
-    Dir[ Env["local"] + "/*"  ].each do |dir|
+    Dir[ Env['local'] + '/*'  ].each do |dir|
     end
   end
 

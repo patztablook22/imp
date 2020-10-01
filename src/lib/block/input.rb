@@ -1,16 +1,17 @@
+# frozen_string_literal: true
 class Input < Block
 
-  @@clip = ""
+  @@clip = ''
 
   def initialize
     @curs = 0
     @left = 0
-    @data = ""
-    @hint = ""
+    @data = ''
+    @hint = ''
   end
 
   def focus
-    App.navi "ENTER" => "search"
+    App.navi 'ENTER' => 'search'
   end
 
   def update data
@@ -22,7 +23,7 @@ class Input < Block
 
     case ch
     when :key_down
-      App.focus "result"
+      App.focus 'result'
       return
     when :key_left
       return if @curs == 0
@@ -32,11 +33,11 @@ class Input < Block
       @curs += 1
     when :backspace
       return if @curs == 0
-      @data[@curs - 1] = ""
+      @data[@curs - 1] = ''
       @curs -= 1
     when :delete
       return if @curs == @data.length
-      @data[@curs] = ""
+      @data[@curs] = ''
     when :enter
       App.result nil
       Plugin.search @data do |res|
@@ -48,7 +49,7 @@ class Input < Block
       @curs = @data.length
     when 21
       @@clip = @data[0...@curs]
-      @data[0...@curs] = ""
+      @data[0...@curs] = ''
       @curs = 0
     when 23
     when 25
@@ -78,7 +79,7 @@ class Input < Block
       out @hint
       Curses.attroff(Curses.color_pair(4))
       move [0, 0]
-      out "", false
+      out '', false
     else
 
       if @curs - @left > @w
@@ -89,7 +90,7 @@ class Input < Block
 
       out @data[@left..@left + @w]
       move [0, @curs - @left]
-      out "", false
+      out '', false
 
     end
 

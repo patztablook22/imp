@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Checksum
 
   private
@@ -16,12 +17,12 @@ module Checksum
       @buff = String.new
       @hash = data.values[1]
       @func = Digest#::FUNC
-      @head = "checksum"
+      @head = 'checksum'
       @body = @file
     end
     
     def go!
-      file  = File.read @file rescue raise "unreadable file"
+      file  = File.read @file rescue raise 'unreadable file'
       @buff = @func.hexdigest file
     end
 

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 def makepkg pkgbuild
 
-  srcdir   = pkgbuild["srcdir"][0]
-  pkgdir   = pkgbuild["pkgdir"][0]
-  function = ["prepare", "build", "package"]
+  srcdir   = pkgbuild['srcdir'][0]
+  pkgdir   = pkgbuild['pkgdir'][0]
+  function = ['prepare', 'build', 'package']
 
   Dir.chdir srcdir
 
@@ -40,20 +41,20 @@ def makepkg pkgbuild
       # if shell syntax error
       if err =~ /\Ash: \d+: /
 
-        errline = err.split(": ")[1].to_i
+        errline = err.split(': ')[1].to_i
         script.split("\n").each_with_index do |line, number|
 
           next if number < 5
 
           if number == errline
-            buf = ">>> "
+            buf = '>>> '
           else
-            buf = "    "
+            buf = '    '
           end
 
           buf << errline.to_i
           buf << Msg.tab(number, 3, true)
-          buf << "    " + line
+          buf << '    ' + line
 
           Err << buf
 
@@ -63,7 +64,7 @@ def makepkg pkgbuild
 
       yield err
 
-      raise "erred"
+      raise 'erred'
 
     end
 

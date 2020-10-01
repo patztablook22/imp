@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 class Loading < Block
 
-  FULL = "█"
-  HALF = "|"
-  NONE = " "
+  FULL = '█'
+  HALF = '|'
+  NONE = ' '
 
   def self.percent p, w
 

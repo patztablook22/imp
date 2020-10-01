@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Progress
 
   attr_reader :head, :body, :status, :whole

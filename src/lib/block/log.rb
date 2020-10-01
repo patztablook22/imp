@@ -1,7 +1,8 @@
+# frozen_string_literal: true
 class Log < Block
 
   def initialize
-    @data = Array.new
+    @data = []
   end
 
   def update data
@@ -14,13 +15,13 @@ class Log < Block
   end
 
   def focus
-    App.navi "ESC" => "cancel"
+    App.navi 'ESC' => 'cancel'
   end
 
   def key ch
     if ch == :escape
-      App.popup "cancel", "Stop installation?", {
-        true  => -> { App.tab "search" },
+      App.popup 'cancel', 'Stop installation?', {
+        true  => -> { App.tab 'search' },
         false => -> {},
       }
     end
@@ -42,7 +43,7 @@ class Log < Block
       end
       out l, false
     end
-    out "", false
+    out '', false
   end
 
 end
