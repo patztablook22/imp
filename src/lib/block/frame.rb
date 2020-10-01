@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 class Frame < Block
 
-  HORIZONTAL   = "─"
-  VERTICAL     = "│"
-  TOP_LEFT     = "┌"
-  TOP_RIGHT    = "┐"
-  BOTTOM_LEFT  = "└"
-  BOTTOM_RIGHT = "┘"
+  HORIZONTAL   = '─'
+  VERTICAL     = '│'
+  TOP_LEFT     = '┌'
+  TOP_RIGHT    = '┐'
+  BOTTOM_LEFT  = '└'
+  BOTTOM_RIGHT = '┘'
 
   def initialize
-    @title = ""
+    @title = ''
   end
 
   def update data
@@ -23,7 +23,7 @@ class Frame < Block
     else
       out TOP_LEFT + HORIZONTAL + @title + HORIZONTAL * (@w - @title.length - 3) + TOP_RIGHT
       for i in (1 .. @h - 2)
-        out VERTICAL + " " * (@w - 2) + VERTICAL
+        out VERTICAL + ' ' * (@w - 2) + VERTICAL
       end
       out BOTTOM_LEFT + HORIZONTAL * (@w - 2) + BOTTOM_RIGHT
     end

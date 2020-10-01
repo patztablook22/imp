@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 def sources pkgbuild
 
-  aurdir  = pkgbuild["aurdir"][0]
-  srcdir  = pkgbuild["srcdir"][0]
-  sources = pkgbuild["source"]
+  aurdir  = pkgbuild['aurdir'][0]
+  srcdir  = pkgbuild['srcdir'][0]
+  sources = pkgbuild['source']
 
-  FileUtils.rm_rf   srcdir if Env["clean"]
+  FileUtils.rm_rf   srcdir if Env['clean']
   FileUtils.mkdir_p srcdir
 
   return if sources.none?
@@ -22,12 +22,12 @@ def sources pkgbuild
   it = 0
   sources.map! do |src|
 
-    hash   = pkgbuild[ checksum.downcase + "sums" ][it]
+    hash   = pkgbuild[ checksum.downcase + 'sums' ][it]
     it    += 1
-    target = srcdir + "/"
+    target = srcdir + '/'
 
     if source =~ /::/
-      tmp     = src.split "::"
+      tmp     = src.split '::'
       target += tmp[0]
       source  = tmp[1]
     else
@@ -51,7 +51,7 @@ def sources pkgbuild
     if src[0] =~ /http(s)?:\/\//
       yield Download.new src[0] => src[1]
     else
-      src[0] = aurdir + "/" + src[0]
+      src[0] = aurdir + '/' + src[0]
       yield "copying: #{src[1]}"
       FileUtils.cp_r src[0], src[1]
     end

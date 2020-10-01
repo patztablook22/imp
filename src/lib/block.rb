@@ -43,7 +43,7 @@ class Block
 
   end
 
-  def out str = "", newline = true
+  def out str = '', newline = true
 
     return if @hide or @p[0] >= @h
     return if @p[1] >= @w
@@ -53,7 +53,7 @@ class Block
 
     if newline
 
-      Curses.addstr str + " " * (@w - @p[1] - str.length)
+      Curses.addstr str + ' ' * (@w - @p[1] - str.length)
 
       @p[0] += 1
       @p[1]  = 0

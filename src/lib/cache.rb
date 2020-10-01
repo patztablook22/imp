@@ -40,11 +40,11 @@ module Cache
 
   def set
 
-    file   = File.new(to_s, "w")
+    file   = File.new(to_s, 'w')
 
     @@data.each do |key, val|
       val = val[0] if val.class == Array and val.size == 1
-      file << key << " = " << val << "\n"
+      file << key << ' = ' << val << "\n"
     end
 
     file.close

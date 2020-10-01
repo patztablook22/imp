@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class Navi < Block
 
-  @@global = {"^C" => "quit"}
+  @@global = {'^C' => 'quit'}
 
   def update data
     if data.nil?
@@ -17,7 +17,7 @@ class Navi < Block
   def display
     @local&.each do |key, val|
       Curses.attron Curses.color_pair(2)
-      out "    ", false
+      out '    ', false
       Curses.attroff Curses.color_pair(2)
       Curses.attron Curses.color_pair(3)
       out key, false

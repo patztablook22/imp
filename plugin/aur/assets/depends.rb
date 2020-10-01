@@ -2,8 +2,8 @@
 def depends pkgbuild
 
   depends  = Array.new
-  depends += pkgbuild["depends"]
-  depends += pkgbuild["makedepends"]
+  depends += pkgbuild['depends']
+  depends += pkgbuild['makedepends']
 
 =begin
   depends.clear if Env["depend"].include? "ALL"

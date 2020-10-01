@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 buf = Array.new
 
-pipe = Pipe.go! "gem list --quiet"
+pipe = Pipe.go! 'gem list --quiet'
 pipe.out.each_line do |line|
 
   line = line.split
@@ -11,8 +11,8 @@ pipe.out.each_line do |line|
   
   line = line[1..-1].join[1...-1]
   
-  if line.start_with? "default:"
-    pkg.version = line.split(":")[1..-1].join(":")
+  if line.start_with? 'default:'
+    pkg.version = line.split(':')[1..-1].join(':')
   else
     pkg.version = line
   end

@@ -13,18 +13,18 @@ module App
   end
 
   @@blocks = {     # main blocks
-    "search"   => Input   .new,
-    "result"   => Result  .new,
-    "debug"    => Debug   .new,
-    "intro"    => Intro   .new,
-    "log"      => Log     .new,
+    'search'   => Input   .new,
+    'result'   => Result  .new,
+    'debug'    => Debug   .new,
+    'intro'    => Intro   .new,
+    'log'      => Log     .new,
   }
 
   @@tabs   = {
-    "intro"    => @@blocks["intro"],
-    "search"   => Tab.new,
-    "install"  => Tab.new,
-    "plugin"   => Tab.new,
+    'intro'    => @@blocks['intro'],
+    'search'   => Tab.new,
+    'install'  => Tab.new,
+    'plugin'   => Tab.new,
   }
 
   @@frames = Array.new(3, Frame.new)
@@ -36,9 +36,9 @@ module App
   def init tui
 
     if Curses.nil? and tui
-      Cli[-1] = "missing curses library"
-      Cli[-1] = "either use CLI or try"
-      Cli[-1] = "imp --upgrade"
+      Cli[-1] = 'missing curses library'
+      Cli[-1] = 'either use CLI or try'
+      Cli[-1] = 'imp --upgrade'
       exit 1
     end
 
@@ -60,7 +60,7 @@ module App
     Curses.cbreak
     Curses.noecho
 
-    search "search remote packages"
+    search 'search remote packages'
     navi.display
     set
     focus @@focus[-1]
@@ -72,8 +72,8 @@ module App
 
   def quit status = 0
     exit status unless tui?
-    exit status if @@popups.any? { |it| it.head == "quit" }
-    App.popup "quit", "Quit imp?", {
+    exit status if @@popups.any? { |it| it.head == 'quit' }
+    App.popup 'quit', 'Quit imp?', {
       true  => -> { exit status },
       false => -> {},
     }
@@ -95,7 +95,7 @@ module App
     return true
   end
 
-  @@tab = ""
+  @@tab = ''
   def tab name
 
     return unless @@tabs.include? name
@@ -109,12 +109,12 @@ module App
     set
 
     case name
-    when "intro"
-      focus "intro"
-    when "search"
-      focus "search"
-    when "install"
-      focus "log"
+    when 'intro'
+      focus 'intro'
+    when 'search'
+      focus 'search'
+    when 'install'
+      focus 'log'
     end
 
     App.render
@@ -165,16 +165,16 @@ module App
     Curses.resize *size
     Curses.erase
 
-    @@tabs["intro"].set( [0, 0], [ size[0] - 2, size[1] ] )
+    @@tabs['intro'].set( [0, 0], [ size[0] - 2, size[1] ] )
 
-    @@tabs["search"].set( [0, 0], [ size[0] - 2, size[1] ] ) do
+    @@tabs['search'].set( [0, 0], [ size[0] - 2, size[1] ] ) do
       @@frames[0].set( [2, 0], [3, 0] )
-      @@blocks["search"].set( [1, 1], [2, -1] )
-      @@blocks["result"].set( [3, 0], [0, 0] )
+      @@blocks['search'].set( [1, 1], [2, -1] )
+      @@blocks['result'].set( [3, 0], [0, 0] )
     end
 
-    @@tabs["install"].set( [0, 0], [ size[0] - 2, size[1] ] ) do
-      @@blocks["log"].set( [0, 0], [0, 0] )
+    @@tabs['install'].set( [0, 0], [ size[0] - 2, size[1] ] ) do
+      @@blocks['log'].set( [0, 0], [0, 0] )
       #@@frames[1].set( [0, size[1] / 2], [0, 0] ) do
       #  @@blocks["debug"].set( [1, 1], [-1, -1] )
       #end
@@ -269,7 +269,7 @@ module App
 
         next if symbol.nil?
 
-        if ["mouse", "scroll"].any? { |a| symbol.to_s.start_with? a }
+        if ['mouse', 'scroll'].any? { |a| symbol.to_s.start_with? a }
           c = Curses.getch.ord - 33
           l = Curses.getch.ord - 33
           mouse symbol, [l, c]

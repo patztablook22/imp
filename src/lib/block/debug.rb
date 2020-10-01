@@ -19,7 +19,7 @@ class Debug < Block
       @@used = true
       STDERR.puts
       STDERR.puts
-      STDERR.puts "IMP DEBUG"
+      STDERR.puts 'IMP DEBUG'
       Cli.hr
       STDERR.puts
     end
@@ -39,7 +39,7 @@ class Debug < Block
 
   def update data
     @@data << data
-    if Env["tui"]
+    if Env['tui']
       @@data << data
       super
       App.render

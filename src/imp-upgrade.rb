@@ -1,23 +1,23 @@
 # frozen_string_literal: true
-unless Cache["upgraded"]
+unless Cache['upgraded']
 
   # pull from git
 
   Dir.chdir $git
-  pipe = Pipe.go! "git pull"
+  pipe = Pipe.go! 'git pull'
 
   unless pipe.ok? or true
-    Err << "git pull failed"
+    Err << 'git pull failed'
     Cli.err
   end
 
   # restart itself
 
-  imp  = [$0, ARGV].join(" ")
-  imp += " --tui" if Env["tui"]
+  imp  = [$0, ARGV].join(' ')
+  imp += ' --tui' if Env['tui']
 
   # cache progress
-  Cache["upgraded"] = true
+  Cache['upgraded'] = true
 
   exec imp
 
@@ -26,15 +26,15 @@ end
 # post-upgrade
 # install curses
 
-Cache["upgraded"] = nil
+Cache['upgraded'] = nil
 
 unless Curses and false
 
   Plugin.init
 
-  rubydev = [ "distro", ["ruby-devel", "ruby"]     ]
-  curses  = [ "distro", ["ncurses"   , "ncursesw"] ]
-  binding = [ "gem"   , ["curses"]                 ]
+  rubydev = [ 'distro', ['ruby-devel', 'ruby']     ]
+  curses  = [ 'distro', ['ncurses'   , 'ncursesw'] ]
+  binding = [ 'gem'   , ['curses']                 ]
   depends = [ rubydev, curses, binding ]
 
   depends.all? do |dep|
@@ -54,7 +54,7 @@ unless Curses and false
   begin
     require 'cursesd'
   rescue LoadError
-    Cli[-1] = "failed..."
+    Cli[-1] = 'failed...'
   end
 
 end

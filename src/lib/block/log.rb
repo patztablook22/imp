@@ -15,13 +15,13 @@ class Log < Block
   end
 
   def focus
-    App.navi "ESC" => "cancel"
+    App.navi 'ESC' => 'cancel'
   end
 
   def key ch
     if ch == :escape
-      App.popup "cancel", "Stop installation?", {
-        true  => -> { App.tab "search" },
+      App.popup 'cancel', 'Stop installation?', {
+        true  => -> { App.tab 'search' },
         false => -> {},
       }
     end
@@ -43,7 +43,7 @@ class Log < Block
       end
       out l, false
     end
-    out "", false
+    out '', false
   end
 
 end

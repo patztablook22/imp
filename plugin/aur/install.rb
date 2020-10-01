@@ -5,21 +5,21 @@ asset 'sources'
 asset 'makepkg'
 
 pkgname = arg
-aurdir  = Env["temp"] + "/aurdir/" + pkgname
-srcdir  = Env["temp"] + "/srcdir/" + pkgname
-pkgdir  = Env["temp"] + "/pkgdir/" + pkgname
+aurdir  = Env['temp'] + '/aurdir/' + pkgname
+srcdir  = Env['temp'] + '/srcdir/' + pkgname
+pkgdir  = Env['temp'] + '/pkgdir/' + pkgname
 
-yield "requesting package"
+yield 'requesting package'
 
 pkgbuild = request(pkgname, aurdir) do |msg|
   yield msg
 end
 
-raise "pkgbuild failed" unless pkgbuild
+raise 'pkgbuild failed' unless pkgbuild
 
-pkgbuild["aurdir"] = aurdir
-pkgbuild["srcdir"] = srcdir
-pkgbuild["pkgdir"] = pkgdir
+pkgbuild['aurdir'] = aurdir
+pkgbuild['srcdir'] = srcdir
+pkgbuild['pkgdir'] = pkgdir
 
 depends(pkgbuild) do |msg|
   yield msg

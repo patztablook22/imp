@@ -11,7 +11,7 @@ class Parser
   def initialize object
 
     @data = Hash[]
-    @buff = Array[""]
+    @buff = Array['']
 
     if object.class == File
       object = object.read
@@ -30,9 +30,9 @@ class Parser
   def push ch
 
     case ch
-    when "#"
+    when '#'
       if @type == :function
-        @buff[-1] << "#"
+        @buff[-1] << '#'
         return
       end
       @comment = true
@@ -48,19 +48,19 @@ class Parser
     when 1
 
       case ch
-      when "="
+      when '='
 
         @type = :constant
         @term = nil
-        @buff+= [""]
+        @buff+= ['']
 
-      when "{"
+      when '{'
 
         @type = :function
         @term = 0
-        @buff+= [""]
+        @buff+= ['']
 
-      when " "
+      when ' '
       else
 
         @buff[0] += ch
@@ -72,8 +72,8 @@ class Parser
       if @type == :constant # constant
 
         if @term.nil?
-          if ch == "("
-            @term = ")"
+          if ch == '('
+            @term = ')'
           else
             @term = "\n"
             @buff[1] += ch
@@ -81,7 +81,7 @@ class Parser
         else
           if ch == @term
             @data[@buff[0]] = @buff[1]
-            @buff = [""]
+            @buff = ['']
           else
             @buff[1] += ch
           end
@@ -90,16 +90,16 @@ class Parser
       else # function
 
         case ch
-        when "{"
+        when '{'
           @term += 1
           @buff[1] += ch
-        when "}"
+        when '}'
           if @term > 0
             @term -= 1
             @buff[1] += ch
           else
             @data[@buff[0]] = @buff[1]
-            @buff = [""]
+            @buff = ['']
           end
         else
           @buff[1] += ch
@@ -116,7 +116,7 @@ class Parser
     buff = Hash.new
     @data.each_pair do |key, val|
 
-      if key.end_with? "()"
+      if key.end_with? '()'
         val = [val]
       else
         tmp = val.split(/ "| '|' |" |\n/)

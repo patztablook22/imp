@@ -8,9 +8,9 @@ module Cli
   GREEN   = "\e[32m"
 
   @@data = [
-    "", #----------------------------------------------------.
-    "", #--------------------------------------.             |
-    "", #----------------------.               |             |
+    '', #----------------------------------------------------.
+    '', #--------------------------------------.             |
+    '', #----------------------.               |             |
   ]#                           |               |             |
   ##                      MESSAGE HEAD  [ message body ]  msg tail
   ##                      ~~~~~~~~~~~~                             
@@ -37,10 +37,10 @@ module Cli
   def []= index, str
     if index == -1
       del
-      puts str unless Env["debug"]
+      puts str unless Env['debug']
     else
       for i in (index..2)
-        @@data[i] = ""
+        @@data[i] = ''
       end
       @@data[index] = str.to_s
       go! unless index == 0 and true
@@ -63,8 +63,8 @@ module Cli
 
   def del
     num = @@size
-    STDERR.print back(num) + " " * num + back(num)
-    @@data = Array.new(3, "")
+    STDERR.print back(num) + ' ' * num + back(num)
+    @@data = Array.new(3, '')
     @@size = 0
   end
 
@@ -82,11 +82,11 @@ module Cli
 
   def go!
 
-    return if @@quiet or Env["debug"]
+    return if @@quiet or Env['debug']
 
     return if @@data[0].empty?
 
-    if Env["verbose"] >= 3
+    if Env['verbose'] >= 3
       pp @@data
       return
     end
@@ -99,7 +99,7 @@ module Cli
 
     buf << @@color
     buf << tab(@@data[0], 8 ).upcase
-    buf << DEFAULT << " ["
+    buf << DEFAULT << ' ['
     len += 10
 
     # add length of @@data[2] and "] "
@@ -108,7 +108,7 @@ module Cli
     # space left for @@data[1], 3 is cursor etc.
     tmp = width - len - 3
 
-    buf << cut(@@data[1], tmp) << "] "
+    buf << cut(@@data[1], tmp) << '] '
     buf << cut(@@data[2], 4 )
     data = @@data
 
@@ -118,7 +118,7 @@ module Cli
     @@size = buf.length
     @@data = data
 
-    if Env["verbose"] > 1
+    if Env['verbose'] > 1
       STDERR.puts
       @@size = 0
     end
@@ -140,7 +140,7 @@ module Cli
 
     else
 
-      tab = " " * (num - str.length)
+      tab = ' ' * (num - str.length)
 
       buf << tab if  right
       buf << str
@@ -164,7 +164,7 @@ module Cli
       l -= 1 if l + r + 3 > num
 
       buf << str[0...l]
-      buf << "..."
+      buf << '...'
       buf << str[-r .. -1]
 
     else
@@ -182,7 +182,7 @@ module Cli
   end
 
   def hr
-    STDERR.puts "─" * width
+    STDERR.puts '─' * width
   end
 
   def clear
@@ -194,7 +194,7 @@ module Cli
     return str if str.length >= num
     buf = String.new
     buf << str if !right
-    buf << " " * (num - str.length)
+    buf << ' ' * (num - str.length)
     buf << str if  right
     buf
   end

@@ -29,7 +29,7 @@ module Local
   private
 
   def impportAll
-    Dir[ Env["local"] + "/*"  ].each do |dir|
+    Dir[ Env['local'] + '/*'  ].each do |dir|
     end
   end
 

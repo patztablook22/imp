@@ -4,7 +4,7 @@ class Pkgbuild
   @data
 
   def initialize
-    file   = File.new "PKGBUILD"
+    file   = File.new 'PKGBUILD'
     parser = Parser.new file
     @data  = parser.data
   end
@@ -50,7 +50,7 @@ class Pkgbuild
 
     buf = []
 
-    tmp = target.split("%")
+    tmp = target.split('%')
     target = tmp[0]
     drop   = tmp[1]
 
@@ -85,7 +85,7 @@ class Pkgbuild
   def complete str
 
     chars = str.split(//)
-    buf = ""
+    buf = ''
     ins = nil
     strict = false
 
@@ -95,19 +95,19 @@ class Pkgbuild
 
         if strict
           case c
-          when "}"
+          when '}'
             tmp  = self[ins, false].to_a[0]
-            tmp = "${" + ins + "}" unless tmp
+            tmp = '${' + ins + '}' unless tmp
             buf << tmp
             ins = nil
-          when "{";
+          when '{';
           else
             ins << c
           end
         else
-          if [" ", ".", ",", "-", "/", "\\", "\"", "'"].include? c
+          if [' ', '.', ',', '-', '/', '\\', '"', "'"].include? c
             tmp = self[ins, false].to_a[0]
-            tmp = "$" + ins unless tmp
+            tmp = '$' + ins unless tmp
             buf << tmp << c
             ins = nil
           else
@@ -117,9 +117,9 @@ class Pkgbuild
 
       else
 
-        if c == "$"
-          ins = ""
-          strict = chars[i + 1] == "{"
+        if c == '$'
+          ins = ''
+          strict = chars[i + 1] == '{'
         else
           buf << c
         end
@@ -130,7 +130,7 @@ class Pkgbuild
 
     unless ins.nil?
       tmp = self[ins, false].to_a[0]
-      tmp = "$" + ins unless tmp
+      tmp = '$' + ins unless tmp
       buf << tmp
     end
 
