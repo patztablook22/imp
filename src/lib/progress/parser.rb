@@ -70,7 +70,7 @@ class Parser
 
       if @type == :constant # constant
 
-        if @term == nil
+        if @term.nil?
           if ch == "("
             @term = ")"
           else

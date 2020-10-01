@@ -3,7 +3,7 @@ class Navi < Block
   @@global = {"^C" => "quit"}
 
   def update data
-    if data == nil
+    if data.nil?
       local = @@global
     else
       local = @@global.merge data
