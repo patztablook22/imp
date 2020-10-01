@@ -31,8 +31,8 @@ fi
 for it in ${!MANAGER[@]}; do
 
   cmd=${MANAGER[$it]}
-  tmp=$(echo $cmd | cut -d" " -f1)
-  type $tmp > /dev/null 2>&1
+  tmp=$(echo "$cmd" | cut -d" " -f1)
+  type "$tmp" > /dev/null 2>&1
 
   if [ $? = 0 ]; then
     todo=$cmd
@@ -66,16 +66,16 @@ buf="\$(NF)"
 for (( i = 1; i < $DEPENDS; i++ )); do
   buf="$buf,\$(NF-$i)"
 done
-buf=$(echo $todo | awk "{print $buf}")
+buf=$(echo "$todo" | awk "{print $buf}")
 
 log DEP "$buf"
 
 # install dependencies
-sudo $todo > /dev/null 2>&1
+sudo "$todo" > /dev/null 2>&1
 
 # clone imp into $BASEDIR/imp
-mkdir -p $BASEDIR  > /dev/null 2>&1
-cd $BASEDIR
+mkdir -p "$BASEDIR"  > /dev/null 2>&1
+cd "$BASEDIR"
 
 backup=0
 
