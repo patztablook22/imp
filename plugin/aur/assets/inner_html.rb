@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 def inner html
   html.strip!
   while html[0] == '<'

@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 def sources pkgbuild
 
   aurdir  = pkgbuild['aurdir'][0]

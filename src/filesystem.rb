@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 # forbid using any of these
 # to prevent important data loss
 

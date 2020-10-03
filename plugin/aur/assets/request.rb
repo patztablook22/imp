@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 def request pkgname, aurdir
 
   if !File.directory? aurdir or Env['clean']

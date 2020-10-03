@@ -1,6 +1,4 @@
-# frozen_string_literal: true
 todo = Task['args'][0]
-Task> 'search results'
 
 if todo.empty?
   Err << 'no keywords provided'
