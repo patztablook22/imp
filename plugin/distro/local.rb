@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 buf = []
 
 pipe = Pipe.go! 'xbps-query -l'

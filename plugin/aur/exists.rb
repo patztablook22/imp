@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 begin
 
   key = URI.encode_www_form_component(arg)
