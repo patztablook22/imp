@@ -5,17 +5,17 @@ module IMP
   extend self
 
   PORT = 12345
-  @@socket = nil
+  @@client = nil
 
   class Daemon
-    @@instance = nil
+  end
+  class Client
   end
 
-  private_constant :Daemon
+  private_constant :Daemon, :Client
 
 end
 
-Dir["#{__dir__}/**/*"].each do |rb|
-  next unless File.file? rb
+Dir["#{__dir__}/**/*.rb"].each do |rb|
   require_relative rb
 end
