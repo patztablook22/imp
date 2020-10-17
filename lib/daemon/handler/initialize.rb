@@ -6,17 +6,19 @@ module IMP
 
       def initialize socket
 
-        @socket = socket
+        @sock = socket
+        @port = nil
+        @user = nil
 
-        @socket.puts Time.now.ctime
-        input = @socket.gets
+        @sock.puts Time.now.ctime
+        input = @sock.gets
 
         case input
         when "stop\n"
-          puts "stopped!"
+          @sock.puts "closing!"
           exit
         when nil
-          @socket.close
+          close
         else
         end
 
