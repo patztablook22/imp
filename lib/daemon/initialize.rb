@@ -2,32 +2,27 @@ module IMP
   class Daemon
 
     def initialize config
-
       socket = TCPServer.new(PORT)
-
       fork do
-
         @serv = socket
         Signal.trap("EXIT") { close }
-
         Process.daemon
-
-        listener
-
+        start
       end
-
       socket.close
-
     end
 
     def listener
       loop do
-        Thread.start(@serv.accept) do |client|
+        Thread.new(@serv.accept) do |client|
           Handler.new(client)
         end
       rescue IOError
-        puts "error"
-        exit
+        close
+        Handler.each do |hand|
+          hand.close
+        end
+        break
       end
     end
 
