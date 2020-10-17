@@ -11,17 +11,24 @@ module IMP
         @user = nil
 
         @sock.puts Time.now.ctime
-        input = @sock.gets
 
-        case input
-        when "stop\n"
-          @sock.puts "closing!"
-          exit
-        when nil
+        # add to connected client list
+        @@all << self
+
+        # now just receive requests
+        listener
+
+      end
+
+      def listener
+        loop do
+          respond
+        rescue IOError
+          @all.delete(self)
           close
-        else
+          break
+        rescue
         end
-
       end
 
     end
