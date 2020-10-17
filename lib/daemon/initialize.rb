@@ -8,24 +8,17 @@ module IMP
 
     end
 
+    def stop
+      @socket&.close
+    end
+
     def listener
       loop do
         Thread.start(@socket.accept) do |client|
-          handler(client)
+          Handler.new(client)
         end
-      end
-    end
-
-    def handler client
-      client.puts Time.now.ctime
-      input = client.gets
-      pp input
-      case input
-      when "stop\n"
-        @socket.close
-      when nil
-        client.close
-      else
+      rescue IOError
+        break
       end
     end
 
