@@ -1,4 +1,4 @@
-require_relative 'lib/imp/version'
+require_relative 'lib/api/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "imp-api"
