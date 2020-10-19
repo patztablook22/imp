@@ -1,18 +1,19 @@
 module IMP
   class Client
 
-    def request(data, &hook)
+    def request(event, data, &hook)
 
       raise if @requests.nil?
 
       uuid = Random.uuid
       buff = {
-        'uuid' => uuid,
-        'data' => data,
+        'uuid'  => uuid,
+        'event' => event,
+        'data'  => data,
       }
 
       if hook.nil?
-        response = nil
+        response = :waiting
         hook = Proc.new do |data|
           response = data
         end
@@ -22,7 +23,7 @@ module IMP
       @sock.puts buff.to_json
 
       unless block_given?
-        while response.nil?
+        while response == :waiting
           sleep 0.1
         end
         return response

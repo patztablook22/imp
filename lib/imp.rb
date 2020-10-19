@@ -1,14 +1,10 @@
 require 'socket'
-require 'fileutils'
-require 'securerandom'
 require 'json'
-require 'singleton'
+require 'securerandom'
 
 module IMP
 
   extend self
-
-  PORT = 12345
   @@client = nil
 
   module Daemon

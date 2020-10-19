@@ -3,6 +3,7 @@ module IMP
 
     def close
       @sock&.close
+      @sock = nil
     end
   
   end

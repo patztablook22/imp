@@ -10,7 +10,11 @@ module IMP
         @port = nil
         @user = nil
 
-        @sock.puts Time.now.ctime
+        # identification
+        @sock.puts({
+          'imp'     => 'imp',
+          'version' => IMP::VERSION,
+        }.to_json)
 
         # add to connected client list
         @@all << self

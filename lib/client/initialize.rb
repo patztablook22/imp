@@ -5,26 +5,16 @@ module IMP
 
       @sock = TCPSocket.new('localhost', PORT)
 
-      # initial ping
-      @sock.gets
+      # identification
+      # todo separate version error
+      buff = JSON.parse(@sock.gets)
+      raise if buff['imp'].nil?
+      raise if buff['version'] != IMP::VERSION
 
       # now just receive responses
+      @requests = Hash.new
       Thread.new do
         listener
-      end
-
-    end
-
-    def listener
-
-      @requests = Hash.new
-
-      loop do
-        response
-      rescue IOError
-        close
-        break
-      rescue
       end
 
     end

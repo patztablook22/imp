@@ -5,13 +5,13 @@ module IMP
 
     def start config
       socket = TCPServer.new(PORT)
-      #fork do
+      fork do
         @@server = socket
         Signal.trap("EXIT") { close }
-        #Process.daemon
+        Process.daemon
         listener
-      #end
-      #socket.close
+      end
+      socket.close
     end
 
     def listener
