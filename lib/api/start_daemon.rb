@@ -2,7 +2,7 @@ module IMP
 
   def start_daemon
     begin
-      Daemon.new nil
+      Daemon.start nil
       return true
     rescue
       return false

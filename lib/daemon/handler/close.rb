@@ -1,5 +1,5 @@
 module IMP
-  class Daemon
+  module Daemon
     class Handler
 
       def close

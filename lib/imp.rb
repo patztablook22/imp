@@ -2,6 +2,7 @@ require 'socket'
 require 'fileutils'
 require 'securerandom'
 require 'json'
+require 'singleton'
 
 module IMP
 
@@ -10,7 +11,8 @@ module IMP
   PORT = 12345
   @@client = nil
 
-  class Daemon
+  module Daemon
+    extend self
   end
   class Client
   end

@@ -1,5 +1,5 @@
 module IMP
-  class Daemon
+  module Daemon
     class Handler
 
       @@all = Array.new

@@ -1,8 +1,8 @@
 module IMP
-  class Daemon
+  module Daemon
 
     def stop
-      @serv&.close
+      @@server&.close
     end
 
   end

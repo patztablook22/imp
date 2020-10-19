@@ -1,5 +1,5 @@
 module IMP
-  class Daemon
+  module Daemon
     class Handler
 
       def respond
@@ -9,6 +9,8 @@ module IMP
 
         uuid = buff['uuid']
         data = buff['data']
+
+        Daemon.request
 
         buff = {
           'uuid' => uuid,
