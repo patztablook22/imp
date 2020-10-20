@@ -1,12 +1,10 @@
+# frozen_string_literal: true
+
 module IMP
-
   def start_daemon
-    begin
-      Daemon.start nil
-      return true
-    rescue
-      return false
-    end
+    Daemon.start config: nil
+    true
+  rescue StandardError
+    false
   end
-
 end
